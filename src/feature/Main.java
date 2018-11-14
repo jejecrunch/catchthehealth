@@ -1,115 +1,68 @@
 package feature;
 
-import java.awt.EventQueue;
+/*
+ * 파일명:Main.java
+ * 파일설명:로그인 화면
+ * --> 유저 확인 후 회원이면 user info로 전환, 관리자면 user list로 전환
+ * 작성자:성공회대 201632035 한지혜
+ */
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JSlider;
-import javax.swing.JToggleButton;
+import java.awt.*; // Layout
+import javax.swing.*; // Window와 관련된 모든 클래스
 
-public class Main {
+import java.awt.event.*; // Listener(위임자)
 
-	private JFrame frame;
-	private JTextField userid;
-	private JPasswordField password;
-	private JButton btnJoin;
-	private JButton btnFindIdOr;
-	private JLabel lblLogo;
+public class Main extends JFrame implements ActionListener{
 
-	/**
-	 * Launch the application.
-	 */
+	private CardLayout cards=new CardLayout();
+	private Login login=new Login();
+	private UserInfo u_info=new UserInfo();
+	
+
+	// 프로그램 실행
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		Main main=new Main();
 	}
 
-	/**
-	 * Create the application.
-	 */
+	// 어플리케이션 생성
 	public Main() {
-		initialize();
+		super("건강을 자바조");
+		setLayout(cards);
+		getContentPane().add("LOGIN", login);
+		getContentPane().add("USER_INFO", u_info);
+		setSize(1000,800); // window 크기 결정
+		setLocation(100,100); // window 위치 결정
+		setVisible(true); // window를 보여준다.
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기 누르면 메모리 해제
+		login.joinB.addActionListener(this);
+		// 이벤트 등록
+		
+		add(getContentPane(), "userin");
+		add(getContentPane(), "userli");
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==login.loginB) {
+			cards.show(getContentPane(), "userin");
+		} else if(e.getSource()==login.joinB) {
+			// 가입하기 창 생성
+			final Frame joinF = new Frame("가입하기");
+			joinF.add(new Join());
+			joinF.setVisible(true);
+			joinF.setSize(800, 600);
+			joinF.setLocation(200, 200);
+			// 가입하기 창만 닫기
+			joinF.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					joinF.setVisible(false);
+					joinF.dispose();
+				}
+			});
+		} else if(e.getSource()==login.findidpwB) {
+			cards.show(getContentPane(), "find id or pw");
+		}
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(204, 204, 255));
-		frame.getContentPane().setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		userid = new JTextField();
-		userid.setBounds(292, 273, 221, 32);
-		frame.getContentPane().add(userid);
-		userid.setColumns(10);
-		
-		password = new JPasswordField();
-		password.setBounds(292, 317, 221, 32);
-		frame.getContentPane().add(password);
-		
-		JButton btnLogin = new JButton("LOGIN");
-		btnLogin.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String uId=userid.getText();
-				String pw =password.getText();
-				
-				if(uId.equals("id") && pw.equals("pass")) {
-					JOptionPane.showMessageDialog(frame, "Login success!");
-				} else {
-					JOptionPane.showMessageDialog(frame, "Login fail!");
-				}
-			}
-		});
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(204, 204, 255));
-		btnLogin.setBounds(292, 361, 105, 27);
-		frame.getContentPane().add(btnLogin);
-		
-		btnJoin = new JButton("JOIN");
-		btnJoin.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnJoin.setForeground(new Color(255, 255, 255));
-		btnJoin.setBackground(new Color(204, 204, 255));
-		btnJoin.setBounds(408, 361, 105, 27);
-		frame.getContentPane().add(btnJoin);
-		
-		btnFindIdOr = new JButton("FIND ID OR PASSWORD");
-		btnFindIdOr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnFindIdOr.setForeground(new Color(255, 255, 255));
-		btnFindIdOr.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnFindIdOr.setBackground(new Color(204, 204, 255));
-		btnFindIdOr.setBounds(292, 400, 221, 27);
-		frame.getContentPane().add(btnFindIdOr);
-		
-		lblLogo = new JLabel("LOGO");
-		lblLogo.setBackground(new Color(204, 204, 255));
-		lblLogo.setFont(new Font("Calibri", Font.PLAIN, 15));
-		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setBounds(292, 114, 221, 125);
-		frame.getContentPane().add(lblLogo);
-	}
+
 }
