@@ -14,9 +14,9 @@ import java.awt.event.*; // Listener(위임자)
 
 public class Main extends JFrame implements ActionListener{
 
-	private CardLayout cards=new CardLayout();
+	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
-	private UserInfo u_info=new UserInfo();
+	private UserInfo userin=new UserInfo();
 	
 
 	// 프로그램 실행
@@ -29,22 +29,21 @@ public class Main extends JFrame implements ActionListener{
 		super("건강을 자바조");
 		setLayout(cards);
 		getContentPane().add("LOGIN", login);
-		getContentPane().add("USER_INFO", u_info);
+		getContentPane().add("USER_INFO", userin);
 		setSize(1000,800); // window 크기 결정
 		setLocation(100,100); // window 위치 결정
 		setVisible(true); // window를 보여준다.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기 누르면 메모리 해제
-		login.joinB.addActionListener(this);
 		// 이벤트 등록
-		
-		add(getContentPane(), "userin");
-		add(getContentPane(), "userli");
+		login.loginB.addActionListener(this);
+		login.joinB.addActionListener(this);
+		login.findidpwB.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==login.loginB) {
-			cards.show(getContentPane(), "userin");
+			cards.show(getContentPane(), "USER_INFO");
 		} else if(e.getSource()==login.joinB) {
 			// 가입하기 창 생성
 			final Frame joinF = new Frame("가입하기");
@@ -60,9 +59,19 @@ public class Main extends JFrame implements ActionListener{
 				}
 			});
 		} else if(e.getSource()==login.findidpwB) {
-			cards.show(getContentPane(), "find id or pw");
+			// 아이디 비번 찾기 창 생성
+			final Frame findidpwF = new Frame("아이디 비밀번호 찾기");
+			findidpwF.add(new FindIdPw());
+			findidpwF.setVisible(true);
+			findidpwF.setSize(320, 310);
+			findidpwF.setLocation(400, 400);
+			// 아이디 비번 찾기 창만 닫기
+			findidpwF.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					findidpwF.setVisible(false);
+					findidpwF.dispose();
+				}
+			});
 		}
 	}
-
-
 }
