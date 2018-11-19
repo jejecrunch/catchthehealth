@@ -9,7 +9,7 @@ public class Login extends JPanel{
 	private JTextField userid;
 	private JPasswordField password;
 	JButton loginB, joinB, findidpwB;
-	private ImageIcon logo=new ImageIcon(".\\images\\logo.png");
+	private ImageIcon logo=new ImageIcon("./images/logo.png");
 	private JLabel logoL=new JLabel();
 	
 	public String getId() {
@@ -58,7 +58,8 @@ public class Login extends JPanel{
 		
 		JPanel p=new JPanel();
 		
-		p.setOpaque(false); // 투명모드 전환
+		p.setOpaque(false);
+		p.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		p.add(loginB);
 		p.add(joinB);
 		p.add(findidpwB);
