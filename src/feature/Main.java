@@ -27,7 +27,7 @@ public class Main extends JFrame implements ActionListener{
 	// 어플리케이션 생성
 	public Main() {
 		super("건강을 자바조");
-		setLayout(cards);
+		getContentPane().setLayout(cards);
 		getContentPane().add("LOGIN", login);
 		getContentPane().add("USER_INFO", userin);
 		setSize(1000,800); // window 크기 결정

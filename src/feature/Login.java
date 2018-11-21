@@ -58,7 +58,8 @@ public class Login extends JPanel{
 		
 		JPanel p=new JPanel();
 		
-		p.setOpaque(false); // 투명모드 전환
+		p.setOpaque(false);
+		p.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		p.add(loginB);
 		p.add(joinB);
 		p.add(findidpwB);
