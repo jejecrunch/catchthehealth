@@ -9,7 +9,7 @@ public class Login extends JPanel{
 	private JTextField userid;
 	private JPasswordField password;
 	JButton loginB, joinB, findidpwB;
-	private ImageIcon logo=new ImageIcon(".\\images\\logo.png");
+	private ImageIcon logo=new ImageIcon("./images/logo.png");
 	private JLabel logoL=new JLabel();
 	
 	public String getId() {
