@@ -16,7 +16,7 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
-	private UserInfo userin=new UserInfo();
+	private Menu menu=new Menu();
 	
 
 	// 프로그램 실행
@@ -29,7 +29,7 @@ public class Main extends JFrame implements ActionListener{
 		super("건강을 자바조");
 		getContentPane().setLayout(cards);
 		getContentPane().add("LOGIN", login);
-		getContentPane().add("USER_INFO", userin);
+		getContentPane().add("MENU", menu);
 		setSize(1000,800); // window 크기 결정
 		setLocation(100,100); // window 위치 결정
 		setVisible(true); // window를 보여준다.
@@ -43,7 +43,7 @@ public class Main extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==login.loginB) {
-			cards.show(getContentPane(), "USER_INFO");
+			cards.show(getContentPane(), "MENU");
 		} else if(e.getSource()==login.joinB) {
 			// 가입하기 창 생성
 			final Frame joinF = new Frame("가입하기");
