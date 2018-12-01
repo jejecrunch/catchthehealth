@@ -3,6 +3,10 @@ package feature;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout.Alignment;
 import com.jgoodies.forms.layout.FormLayout;
@@ -19,11 +23,12 @@ public class Join extends JPanel {
 	private JTextField phonenumberF;
 	private JTextField phonenumber2F;
 	private JTextField addressF;
+	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
 
 	public Join() {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
-		setBounds(100,100,1000,800);
+		setBounds(100,100,800,600);
 		setLayout(null);
 
 		// top
@@ -52,7 +57,6 @@ public class Join extends JPanel {
 		JPanel p=new JPanel();
 
 		p.setOpaque(false);
-
 		p.setBounds(200, 115, 350, 330);
 
 		add(p);
@@ -69,8 +73,20 @@ public class Join extends JPanel {
 
 		idF = new JTextField();
 		idF.setBounds(150, 0, 125, 25);
-		idF.setFont(new Font("Calibri", Font.PLAIN, 15));
+		idF.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		idF.setColumns(10);
+		idF.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(((JTextField) e.getSource()).getText().length() > 10) // 10자 이상이면 consume
+					e.consume();
+
+				if(Pattern.matches(REGEX, idF.getText())) { // 한글이 입력되었을 때
+					JOptionPane.showMessageDialog(p, "잘못된 아이디입니다.", "아이디 오류", JOptionPane.WARNING_MESSAGE);
+					idF.setText("");
+					e.consume();
+				}
+			}
+		});
 		p.add(idF);
 
 		// password
