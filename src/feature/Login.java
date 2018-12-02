@@ -72,9 +72,7 @@ public class Login extends JPanel{
 		logoL.setBounds(380, 200, logo.getIconWidth(), logo.getIconHeight());
 		userid.setBounds(400, 400, 170, 25);
 		password.setBounds(400, 450, 170, 25);
-		
-		
-		
+
 		p.setOpaque(false);
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		p.add(loginB);
