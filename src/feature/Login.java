@@ -1,6 +1,9 @@
 package feature;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.regex.Pattern;
 
 import javax.swing.*;
 
@@ -9,8 +12,9 @@ public class Login extends JPanel{
 	private JTextField userid;
 	private JPasswordField password;
 	JButton loginB, joinB, findidpwB;
-	private ImageIcon logo=new ImageIcon(".\\images\\logo.png");
+	private ImageIcon logo=new ImageIcon("./images/logo.png");
 	private JLabel logoL=new JLabel();
+	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
 	
 	public String getId() {
 		return userid.getText().trim();
@@ -21,9 +25,22 @@ public class Login extends JPanel{
 	}
 	
 	public Login() {
+		JPanel p=new JPanel();
 		setBackground(new Color(204, 204, 255));
 		logoL.setIcon(logo);
 		userid=new JTextField();
+		userid.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if(((JTextField) e.getSource()).getText().length() > 10) // 10자 이상이면 consume
+					e.consume();
+
+				if(Pattern.matches(REGEX, userid.getText())) { // 한글이 입력되었을 때
+					JOptionPane.showMessageDialog(p, "잘못된 아이디입니다.", "아이디 오류", JOptionPane.WARNING_MESSAGE);
+					userid.setText("");
+					e.consume();
+				}
+			}
+		});
 		password=new JPasswordField();
 		
 		loginB=new JButton("LOGIN");
@@ -55,10 +72,9 @@ public class Login extends JPanel{
 		logoL.setBounds(380, 200, logo.getIconWidth(), logo.getIconHeight());
 		userid.setBounds(400, 400, 170, 25);
 		password.setBounds(400, 450, 170, 25);
-		
-		JPanel p=new JPanel();
-		
-		p.setOpaque(false); // 투명모드 전환
+
+		p.setOpaque(false);
+		p.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		p.add(loginB);
 		p.add(joinB);
 		p.add(findidpwB);
