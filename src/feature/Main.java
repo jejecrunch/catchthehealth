@@ -17,7 +17,7 @@ public class Main extends JFrame implements ActionListener{
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
 	private MenuUser menu=new MenuUser();
-	
+	private MemberDAO memdao = MemberDAO.getInstance();
 
 	// 프로그램 실행
 	public static void main(String[] args) {
@@ -34,6 +34,8 @@ public class Main extends JFrame implements ActionListener{
 		setLocation(100,100); // window 위치 결정
 		setVisible(true); // window를 보여준다.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기 누르면 메모리 해제
+		// admin 자료는 사전에 미리 입력한다.
+		memdao.add(new Member("admin","test123","관리자","010-1234-5678","admin@test.com"));
 		// 이벤트 등록
 		login.loginB.addActionListener(this);
 		login.joinB.addActionListener(this);

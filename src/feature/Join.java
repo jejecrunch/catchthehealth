@@ -15,6 +15,9 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 public class Join extends JPanel {
+	private MemberDAO memdao;
+	private Member newMem = new Member();
+	private String ageR;
 	private JTextField idF;
 	private JTextField pwF;
 	private JTextField pwcF;
@@ -25,7 +28,7 @@ public class Join extends JPanel {
 	private JTextField addressF;
 	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
 
-	public Join() {
+	public Join() {		
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,800,600);
@@ -40,10 +43,6 @@ public class Join extends JPanel {
 		add(joinus);
 
 		JButton okB = new JButton("OK");
-		okB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		okB.setForeground(Color.WHITE);
 		okB.setFont(new Font("Calibri", Font.PLAIN, 15));
 		okB.setBackground(new Color(204, 204, 255));
@@ -51,6 +50,7 @@ public class Join extends JPanel {
 		okB.setBorderPainted(false);
 		okB.setFocusPainted(false);
 		okB.setContentAreaFilled(false);
+		okB.addActionListener(new OkAction());
 		add(okB);
 
 		// join에 패널 추가
@@ -128,6 +128,7 @@ public class Join extends JPanel {
 		checkB.setBorderPainted(false);
 		checkB.setFocusPainted(false);
 		checkB.setContentAreaFilled(false);
+		checkB.addActionListener(new PwCheck());
 		p.add(checkB);
 
 		// name
@@ -160,6 +161,7 @@ public class Join extends JPanel {
 		ageRange.setBackground(new Color(204, 204, 255));
 		ageRange.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		ageRange.setModel(new DefaultComboBoxModel(new String[] {"10대", "20대", "30대", "40대", "50대", "60대", "70대", "80대 이상"}));
+		ageR=(String)ageRange.getSelectedItem();
 		p.add(ageRange);
 
 		// phonenumber
@@ -220,5 +222,33 @@ public class Join extends JPanel {
 		addressF.setFont(new Font("Calibri", Font.PLAIN, 15));
 		addressF.setColumns(10);
 		p.add(addressF);
+	}
+	
+	class PwCheck implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			String pw1=pwF.getText();
+			String pw2=pwcF.getText();
+			if(pw1.equals(pw2)) {
+				newMem.setPw(pwF.getText());
+				// 비밀번호가 동일하다.
+			} else {
+				pwcF.setText("");
+				// 비밀번호가 동일하지 않다.
+			}
+		}
+	}
+	
+	class OkAction implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			newMem.setId(idF.getText());
+			newMem.setName(nameF.getText());
+			newMem.setAgeRange(ageR);
+			newMem.setPhone(phonenumberF.getText());
+			newMem.setPhone2(phonenumber2F.getText());
+			newMem.setEmail(emailF.getText());
+			newMem.setAddress(addressF.getText());
+			// 멤버리스트에 newMem 삽입
+			memdao.add(newMem);
+		}
 	}
 }

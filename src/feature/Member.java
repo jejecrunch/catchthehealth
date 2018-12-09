@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class Member {
 	private String id;
+	private String pw;
 	private String name;
-	private int age;
+	private String ageRange;
 	private String phone;
+	private String phone2;
 	private String email;
 	private String address;
 	private int weight;
@@ -16,11 +18,28 @@ public class Member {
 	private Map<String, String> ptPlan = new HashMap<String, String>();
 	private Map<String, String> ptMeal = new HashMap<String, String>();
 	
+	public Member() {
+		
+	}
+	
+	public Member(String id, String pw, String name, String phone, String email) {
+		this.id=id;
+		this.pw=pw;
+		this.name=name;
+		this.phone=phone;
+		this.email=email;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw=pw;
 	}
 	public String getName() {
 		return name;
@@ -28,17 +47,23 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
-		return age;
+	public String getAgeRange() {
+		return ageRange;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setAgeRange(String ageRange) {
+		this.ageRange = ageRange;
 	}
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
 	}
 	public String getEmail() {
 		return email;
