@@ -22,6 +22,11 @@ public class Member {
 		
 	}
 	
+	public Member(String id, String pw) {
+		this.id=id;
+		this.pw=pw;
+	}
+	
 	public Member(String id, String pw, String name, String phone, String email) {
 		this.id=id;
 		this.pw=pw;
@@ -106,5 +111,12 @@ public class Member {
 	}
 	public void setPtMeal(String day, String meal) {
 		ptMeal.put(day, meal);
+	}
+	
+	@Override
+	public String toString() {
+		return "[id=" + id + ", pw=" + pw + ", name=" + name + ", ageRange=" + ageRange + ", phone=" + phone
+				+ ", phone2=" + phone2 + ", email=" + email + ", address=" + address + ", weight=" + weight + ", fat="
+				+ fat + ", muscle=" + muscle + ", ptPlan=" + ptPlan + ", ptMeal=" + ptMeal + "]\n";
 	}
 }

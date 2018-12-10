@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
@@ -15,7 +17,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 public class Join extends JPanel {
-	private MemberDAO memdao;
+	private MemberDAO memdao=MemberDAO.getInstance();
 	private Member newMem = new Member();
 	private String ageR;
 	private JTextField idF;
@@ -27,8 +29,22 @@ public class Join extends JPanel {
 	private JTextField phonenumber2F;
 	private JTextField addressF;
 	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
+	private JFrame frame;
 
-	public Join() {		
+	public Join() {
+		// 보면서 확인하는 용
+		frame = new JFrame("pt 정보 테스트");
+		frame.getContentPane().setFont(new Font("Calibri", Font.PLAIN, 15));
+		frame.getContentPane().setForeground(new Color(255, 255, 255));
+		frame.getContentPane().setBackground(new Color(204, 204, 255));
+		frame.setSize(800,600); // window 크기 결정
+		frame.setLocation(200,200); // window 위치 결정
+		frame.setForeground(new Color(255, 255, 255));
+		frame.setBackground(new Color(204, 204, 255));
+		frame.setVisible(true); // window를 보여준다.
+		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
+
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,800,600);
@@ -40,7 +56,7 @@ public class Join extends JPanel {
 		joinus.setHorizontalAlignment(SwingConstants.CENTER);
 		joinus.setForeground(new Color(255, 255, 255));
 		joinus.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		add(joinus);
+		frame.getContentPane().add(joinus);
 
 		JButton okB = new JButton("OK");
 		okB.setForeground(Color.WHITE);
@@ -51,7 +67,7 @@ public class Join extends JPanel {
 		okB.setFocusPainted(false);
 		okB.setContentAreaFilled(false);
 		okB.addActionListener(new OkAction());
-		add(okB);
+		frame.getContentPane().add(okB);
 
 		// join에 패널 추가
 		JPanel p=new JPanel();
@@ -59,7 +75,7 @@ public class Join extends JPanel {
 		p.setOpaque(false);
 		p.setBounds(200, 115, 350, 330);
 
-		add(p);
+		frame.getContentPane().add(p);
 		p.setLayout(null);
 
 		// id
@@ -142,7 +158,7 @@ public class Join extends JPanel {
 
 		nameF = new JTextField();
 		nameF.setBounds(150, 105, 125, 25);
-		nameF.setFont(new Font("Calibri", Font.PLAIN, 15));
+		nameF.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		nameF.setColumns(10);
 		p.add(nameF);
 
@@ -160,7 +176,7 @@ public class Join extends JPanel {
 		ageRange.setForeground(new Color(255, 255, 255));
 		ageRange.setBackground(new Color(204, 204, 255));
 		ageRange.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		ageRange.setModel(new DefaultComboBoxModel(new String[] {"10대", "20대", "30대", "40대", "50대", "60대", "70대", "80대 이상"}));
+		ageRange.setModel(new DefaultComboBoxModel(new String[] {"", "10대", "20대", "30대", "40대", "50대", "60대", "70대", "80대 이상"}));
 		ageR=(String)ageRange.getSelectedItem();
 		p.add(ageRange);
 
@@ -219,11 +235,18 @@ public class Join extends JPanel {
 
 		addressF = new JTextField();
 		addressF.setBounds(150, 280, 125, 25);
-		addressF.setFont(new Font("Calibri", Font.PLAIN, 15));
+		addressF.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		addressF.setColumns(10);
 		p.add(addressF);
+		
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
 	}
-	
+
 	class PwCheck implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			String pw1=pwF.getText();
@@ -237,18 +260,30 @@ public class Join extends JPanel {
 			}
 		}
 	}
-	
+
 	class OkAction implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			newMem.setId(idF.getText());
-			newMem.setName(nameF.getText());
-			newMem.setAgeRange(ageR);
-			newMem.setPhone(phonenumberF.getText());
-			newMem.setPhone2(phonenumber2F.getText());
-			newMem.setEmail(emailF.getText());
-			newMem.setAddress(addressF.getText());
-			// 멤버리스트에 newMem 삽입
-			memdao.add(newMem);
+			if(idF.getText()!=""&&nameF.getText()!=""&&pwF.getText()!=""&&phonenumberF.getText()!=""&&addressF.getText()!="") {
+				newMem.setId(idF.getText());
+				newMem.setPw(pwcF.getText());
+				newMem.setName(nameF.getText());
+				newMem.setAgeRange(ageR);
+				newMem.setPhone(phonenumberF.getText());
+				newMem.setPhone2(phonenumber2F.getText());
+				newMem.setEmail(emailF.getText());
+				newMem.setAddress(addressF.getText());
+				// 멤버리스트에 newMem 삽입
+				memdao.add(newMem);
+				// 확인용
+				System.out.println(memdao.toString());
+
+				// 해당 창 안보이게 닫기
+				frame.setVisible(false);
+				frame.dispose();
+			} else {
+				//JOptionPane.showMessageDialog("입력해야 할 곳이 남았습니다.", "입력 폼 오류", JOptionPane.WARNING_MESSAGE);
+				System.out.println("입력해야할 곳이 남았습니다.");
+			}
 		}
 	}
 }
