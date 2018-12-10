@@ -32,7 +32,7 @@ public class MenuAdmin extends JPanel {
 		g.drawLine(370, 400, 630, 400);
 	}
 
-	MenuAdmin() {
+	public MenuAdmin() {
 		setLayout(null); // 레이아웃 설정
 		setBackground(new Color(204, 204, 255));
 
@@ -44,7 +44,7 @@ public class MenuAdmin extends JPanel {
 		userManagementB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		userManagementB.setBounds(420, 320, 170, 40); // 버튼 배치
 		userManagementB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
-		userManagementB.setFont(new Font("Calibri", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
+		userManagementB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 
 		userManagementB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -59,7 +59,7 @@ public class MenuAdmin extends JPanel {
 		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		noticeB.setBounds(420, 460, 170, 40); // 버튼 배치
 		noticeB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
-		noticeB.setFont(new Font("Calibri", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
+		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 
 		noticeB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -12,6 +12,7 @@ public class Login extends JPanel{
 	private JTextField userid;
 	private JPasswordField password;
 	JButton loginB, joinB, findidpwB;
+	private MemberDAO memdao;
 	private ImageIcon logo=new ImageIcon("./images/logo.png");
 	private JLabel logoL=new JLabel();
 	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
