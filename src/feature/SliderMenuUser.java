@@ -18,7 +18,7 @@ public class SliderMenuUser extends JPanel {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("SliderMenuUser");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000, 800);
+		frame.setBounds(100,100,1000, 800);
 		frame.setBackground(new Color(204, 204, 255));
 		SliderMenuUser sliderMenuUser = new SliderMenuUser(); 
 		frame.getContentPane().add(sliderMenuUser);
