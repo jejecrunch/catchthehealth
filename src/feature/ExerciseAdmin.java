@@ -1,28 +1,32 @@
 package feature;
 
 import java.awt.*;
+import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
-public class Exercise extends JPanel {
+public class ExerciseAdmin extends JPanel {
 	private ImageIcon addP = new ImageIcon("./images/new_event.png");
 	private ImageIcon addM = new ImageIcon("./images/new_meal.png");
+	private JFrame frame2;
 	private JTable tableP;
 	private JTable tableM;
+	private MemberDAO memdao = MemberDAO.getInstance();
 	private DefaultTableModel modelP; // 디폴트 테이블 모델
 	private DefaultTableModel modelM; // 디폴트 테이블 모델
 	private String[] column = {"mon","tue","wed","thu","fri","sat","sun"};
-	private String[][] planData= {{"07:00","","","","","",""}};
+	private String[][] planData= {{"","","","","","",""}};
 	private String[] columnM= {""};
 	private String[][] mealData = {{"morning"},{"lunch"},{"dinner"}};
 
 	// 프로그램 실행
 	public static void main(String[] args) {
-		Exercise main=new Exercise();
+		ExerciseAdmin main=new ExerciseAdmin();
 	}
 
 	// 어플리케이션 생성
-	public Exercise() {
+	public ExerciseAdmin() {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,800,600);
@@ -59,6 +63,24 @@ public class Exercise extends JPanel {
 		addMeal.setBorderPainted(false);
 		addMeal.setFocusPainted(false);
 		addMeal.setContentAreaFilled(false);
+		addMeal.addActionListener(new ActionListener() {// 식단 추가 버튼 누르면
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame2=new JFrame("식단 추가");
+				frame2.add(new AddMeal());
+				frame2.setVisible(true);
+				frame2.setSize(320, 310);
+				frame2.setLocation(400, 400);
+				frame2.setResizable(false);
+				// 아이디 비번 찾기 창만 닫기
+				frame2.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						frame2.setVisible(false);
+						frame2.dispose();
+					}
+				});
+			}
+		});
 		frame.getContentPane().add(addMeal);
 
 		JButton addPlan = new JButton();
@@ -70,6 +92,24 @@ public class Exercise extends JPanel {
 		addPlan.setBorderPainted(false);
 		addPlan.setFocusPainted(false);
 		addPlan.setContentAreaFilled(false);
+		addPlan.addActionListener(new ActionListener() {// 운동 추가 버튼 누르면
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame2=new JFrame("운동 일정 추가");
+				frame2.add(new AddPlan());
+				frame2.setVisible(true);
+				frame2.setSize(320, 310);
+				frame2.setLocation(400, 400);
+				frame2.setResizable(false);
+				// 아이디 비번 찾기 창만 닫기
+				frame2.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						frame2.setVisible(false);
+						frame2.dispose();
+					}
+				});
+			}
+		});
 		frame.getContentPane().add(addPlan);
 
 		// 운동 일정 테이블

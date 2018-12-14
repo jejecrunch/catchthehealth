@@ -16,8 +16,9 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
-	private MenuUser menuus=new MenuUser();
+	private MenuUser menuus;
 	private MenuAdmin menuad=new MenuAdmin();
+	private ExerciseUser exus;
 	private MemberDAO memdao = MemberDAO.getInstance();
 
 	// 프로그램 실행
@@ -31,7 +32,6 @@ public class Main extends JFrame implements ActionListener{
 		getContentPane().setLayout(cards);
 		getContentPane().add("LOGIN", login);
 		getContentPane().add("MENU_ADMIN", menuad);
-		getContentPane().add("MENU_USER", menuus);
 		setSize(1000,800); // window 크기 결정
 		setLocation(100,100); // window 위치 결정
 		setVisible(true); // window를 보여준다.
@@ -44,6 +44,10 @@ public class Main extends JFrame implements ActionListener{
 		login.loginB.addActionListener(this);
 		login.joinB.addActionListener(this);
 		login.findidpwB.addActionListener(this);
+		menuus.userInfoB.addActionListener(this);
+		menuus.noticeB.addActionListener(this);
+		menuus.healthInfoB.addActionListener(this);
+		menuus.exerciseB.addActionListener(this);
 	}
 
 	@Override
@@ -56,6 +60,8 @@ public class Main extends JFrame implements ActionListener{
 					cards.show(getContentPane(), "MENU_ADMIN");
 				}
 				else {
+					menuus=new MenuUser(id, pw);
+					getContentPane().add("MENU_USER", menuus);
 					cards.show(getContentPane(), "MENU_USER");
 				}
 			} else {
@@ -80,4 +86,16 @@ public class Main extends JFrame implements ActionListener{
 			});
 		}
 	}
+
+	/*public void Ex_u implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String id = login.getId();
+			String pw = login.getPw();
+
+			exus=new ExerciseUser(id, pw);
+			getContentPane().add("EX_USER", exus);
+			cards.show(getContentPane(), "EX_USER");
+		}
+	}*/
 }

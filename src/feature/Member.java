@@ -1,7 +1,6 @@
 package feature;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Member {
 	private String id;
@@ -15,8 +14,8 @@ public class Member {
 	private int weight;
 	private int fat;
 	private int muscle;
-	private Map<String, String> ptPlan = new HashMap<String, String>();
-	private Map<String, String> ptMeal = new HashMap<String, String>();
+	private Map<String, String> ptPlan=new LinkedHashMap<>();
+	private Map<String, String> ptMeal=new LinkedHashMap<>();
 	
 	public Member() {
 		
@@ -103,11 +102,17 @@ public class Member {
 	public String getPtPlan(String day) {
 		return ptPlan.get(day);
 	}
+	public Set<String> planColumn() {
+		return ptPlan.keySet();
+	}
 	public void setPtPlan(String day, String time) {
 		ptPlan.put(day, time);
 	}
 	public String getPtMeal(String day) {
 		return ptMeal.get(day);
+	}
+	public Set<String> mealColumn(){
+		return ptMeal.keySet();
 	}
 	public void setPtMeal(String day, String meal) {
 		ptMeal.put(day, meal);

@@ -1,5 +1,6 @@
 package feature;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,8 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MenuUser extends JPanel {
+	
+	private ExerciseUser exus;
+	JButton userInfoB, healthInfoB, exerciseB, noticeB;
+	private MemberDAO memdao = MemberDAO.getInstance();
 
-	public MenuUser() {
+	public MenuUser(String id, String pw) {
 		JPanel p = new JPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -37,7 +42,7 @@ public class MenuUser extends JPanel {
 		p.setBackground(new Color(204, 204, 255));
 		setBounds(0, 0, 1000, 800);
 		
-		JButton userInfoB = new JButton("회원정보");
+		userInfoB = new JButton("회원정보");
 		userInfoB.setBorderPainted(false); // 버튼 배경 투명하게
 		userInfoB.setFocusPainted(false); // 버튼 배경 투명하게
 		userInfoB.setContentAreaFilled(false); // 버튼 투명하게
@@ -51,7 +56,7 @@ public class MenuUser extends JPanel {
 		});
 		p.add(userInfoB);
 
-		JButton healthInfoB = new JButton("건강정보");
+		healthInfoB = new JButton("건강정보");
 		healthInfoB.setBorderPainted(false); // 버튼 배경 투명하게
 		healthInfoB.setFocusPainted(false); // 버튼 배경 투명하게
 		healthInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
@@ -66,23 +71,16 @@ public class MenuUser extends JPanel {
 		});
 		p.add(healthInfoB);
 
-		JButton exerciseB = new JButton("운동일정");
+		exerciseB = new JButton("운동일정");
 		exerciseB.setBorderPainted(false); // 버튼 배경 투명하게
 		exerciseB.setFocusPainted(false); // 버튼 배경 투명하게
 		exerciseB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		exerciseB.setBounds(400, 400, 170, 40); // 버튼 배치
 		exerciseB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
 		exerciseB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
-
-		exerciseB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Exercise() 실행
-				Exercise exercise = new Exercise();
-			}
-		});
 		p.add(exerciseB);
 
-		JButton noticeB = new JButton("공지사항");
+		noticeB = new JButton("공지사항");
 		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
 		noticeB.setFocusPainted(false); // 버튼 배경 투명하게
 		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
