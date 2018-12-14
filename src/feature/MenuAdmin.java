@@ -61,6 +61,7 @@ public class MenuAdmin extends JPanel {
 		noticeB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Notice() 실행
+				Notice notice = new Notice();
 			}
 		});
 		p.add(noticeB);
