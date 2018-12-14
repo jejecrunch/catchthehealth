@@ -117,6 +117,6 @@ public class Member {
 	public String toString() {
 		return "[id=" + id + ", pw=" + pw + ", name=" + name + ", ageRange=" + ageRange + ", phone=" + phone
 				+ ", phone2=" + phone2 + ", email=" + email + ", address=" + address + ", weight=" + weight + ", fat="
-				+ fat + ", muscle=" + muscle + ", ptPlan=" + ptPlan + ", ptMeal=" + ptMeal + "]\n";
+				+ fat + ", muscle=" + muscle + ", ptPlan=" + ptPlan + ", ptMeal=" + ptMeal + "]";
 	}
 }

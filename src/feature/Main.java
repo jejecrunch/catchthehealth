@@ -52,22 +52,16 @@ public class Main extends JFrame implements ActionListener{
 			String id = login.getId();
 			String pw = login.getPw();
 			if(memdao.searchIdPw(id, pw)!=null) {
-				if(memdao.searchAdmin()) {
+				if(memdao.searchAdmin(id, pw)) {
 					cards.show(getContentPane(), "MENU_ADMIN");
-				} else {
+				}
+				else {
 					cards.show(getContentPane(), "MENU_USER");
 				}
 			} else {
 				JOptionPane.showMessageDialog(getContentPane(), "입력하신 아이디나 비밀번호가 틀렸습니다.", "아아디/비밀번호 오류", JOptionPane.WARNING_MESSAGE);
 			}
 		} else if(e.getSource()==login.joinB) {
-			/*// 가입하기 창 생성
-			final Frame joinF = new Frame("가입하기");
-			Join join = new Join();
-			joinF.add(join);
-			joinF.setVisible(true);
-			joinF.setSize(800, 600);
-			joinF.setLocation(200, 200);*/
 			Join join=new Join();
 		} else if(e.getSource()==login.findidpwB) {
 			// 아이디 비번 찾기 창 생성

@@ -59,7 +59,7 @@ public class MemberDAO {
 		return mem;
 	}
 
-	private boolean compareToIdPw(Member temp, Member member) {
+	public boolean compareToIdPw(Member temp, Member member) {
 		if(temp.getId().equals(member.getId())&&temp.getPw().equals(member.getPw()))
 			return true;
 		else
@@ -67,19 +67,22 @@ public class MemberDAO {
 	}
 	
 	// admin 탐색용 메소드
-	public boolean searchAdmin() {
-		for(int i=0;i<memList.size();) {
-			String name = memList.get(i).getName();
-			// 루프를 돌다가 id가 admin이고 pw가 test123인 멤버를 만나면 true를 리턴
-			if(name == "관리자") {
+	public boolean searchAdmin(String id, String pw) {
+		Member temp=new Member(id,pw);
+		for(int i=0;i<this.memList.size();i++) {
+			if(compareToIdPw(searchIdPw("admin", "test123"), temp))
 				return true;
-			}
 		}
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberDAO\n" + memList;
+		String result = "Member List\n";
+		for(int i=0;i<memList.size();i++) {
+			result += memList.get(i).toString()+"\n";
+		}
+		//return "MemberDAO\n" + memList;
+		return result;
 	}
 }

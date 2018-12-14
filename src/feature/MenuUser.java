@@ -11,8 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MenuUser extends JPanel {
-	
-	//private Notice notice = new Notice();
 
 	public MenuUser() {
 		JPanel p = new JPanel() {
@@ -79,6 +77,7 @@ public class MenuUser extends JPanel {
 		exerciseB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Exercise() 실행
+				Exercise exercise = new Exercise();
 			}
 		});
 		p.add(exerciseB);
@@ -94,7 +93,7 @@ public class MenuUser extends JPanel {
 		noticeB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Notice() 실행
-
+				Notice notice = new Notice();
 			}
 		});
 		setLayout(null);

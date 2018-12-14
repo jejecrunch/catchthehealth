@@ -30,6 +30,7 @@ public class Join extends JPanel {
 	private JTextField addressF;
 	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
 	private JFrame frame;
+	private JPanel p=new JPanel();
 
 	public Join() {
 		// 보면서 확인하는 용
@@ -70,7 +71,6 @@ public class Join extends JPanel {
 		frame.getContentPane().add(okB);
 
 		// join에 패널 추가
-		JPanel p=new JPanel();
 
 		p.setOpaque(false);
 		p.setBounds(200, 115, 350, 330);
@@ -263,7 +263,8 @@ public class Join extends JPanel {
 
 	class OkAction implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			if(idF.getText()!=""&&nameF.getText()!=""&&pwF.getText()!=""&&phonenumberF.getText()!=""&&addressF.getText()!="") {
+			boolean empty=idF.getText().equals("")&&nameF.getText().equals("")&&pwF.getText().equals("")&&phonenumberF.getText().equals("")&&addressF.getText().equals("");
+			if(!empty) {
 				newMem.setId(idF.getText());
 				newMem.setPw(pwcF.getText());
 				newMem.setName(nameF.getText());
@@ -276,13 +277,13 @@ public class Join extends JPanel {
 				memdao.add(newMem);
 				// 확인용
 				System.out.println(memdao.toString());
+				JOptionPane.showMessageDialog(frame, "가입에 성공했습니다.", "가입 성공", JOptionPane.DEFAULT_OPTION);
 
 				// 해당 창 안보이게 닫기
 				frame.setVisible(false);
 				frame.dispose();
 			} else {
-				//JOptionPane.showMessageDialog("입력해야 할 곳이 남았습니다.", "입력 폼 오류", JOptionPane.WARNING_MESSAGE);
-				System.out.println("입력해야할 곳이 남았습니다.");
+				JOptionPane.showMessageDialog(frame, "입력해야 할 곳이 남았습니다.", "입력 폼 오류", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
