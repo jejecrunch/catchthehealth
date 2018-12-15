@@ -39,21 +39,21 @@ public class ExerciseAdmin extends JPanel {
 
 		// 운동 일정 추가 버튼
 		addPlan=new JButton(addP);
-		addPlan.setBounds(860, 25, 40, 40);
+		addPlan.setBounds(820, 25, 40, 40);
 		addPlan.setBorderPainted(false);
 		addPlan.setFocusPainted(false);
 		addPlan.setContentAreaFilled(false);
 		addPlan.addActionListener(new adminExerciseButton());
 		// 식단 추가 버튼
 		addMeal=new JButton(addM);
-		addMeal.setBounds(900, 25, 40, 35);
+		addMeal.setBounds(860, 25, 40, 35);
 		addMeal.setBorderPainted(false);
 		addMeal.setFocusPainted(false);
 		addMeal.setContentAreaFilled(false);
 		addMeal.addActionListener(new adminExerciseButton());
 		// 메뉴 버튼
 		menuB=new JButton(menu);
-		menuB.setBounds(950, 25, 35, 33);
+		menuB.setBounds(900, 25, 35, 33);
 		menuB.setBorderPainted(false);
 		menuB.setFocusPainted(false);
 		menuB.setContentAreaFilled(false);

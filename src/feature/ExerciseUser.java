@@ -10,6 +10,9 @@ public class ExerciseUser extends JPanel {
 	private MemberDAO memdao = MemberDAO.getInstance();
 	private Member person;
 	private JFrame newWindow;
+	private ImageIcon menu = new ImageIcon("./images/menuButton.png");
+
+	JButton menuB;
 
 	// 어플리케이션 생성
 	public ExerciseUser(String id, String pw) {
@@ -26,6 +29,14 @@ public class ExerciseUser extends JPanel {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setForeground(new Color(255, 255, 255));
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+
+		// 메뉴 버튼
+		menuB=new JButton(menu);
+		menuB.setBounds(900, 25, 35, 33);
+		menuB.setBorderPainted(false);
+		menuB.setFocusPainted(false);
+		menuB.setContentAreaFilled(false);
+		menuB.addActionListener(new userExerciseButton());
 
 		// 운동 일정 테이블
 		// 운동 일정 테이블의 데이터값과 데이터가 어떤 것인지 알려주는 column 값으로 모델 생성
@@ -47,7 +58,7 @@ public class ExerciseUser extends JPanel {
 
 			}
 		};
-		
+
 		p.setForeground(new Color(255, 255, 255));
 		p.setBackground(new Color(204, 204, 255));
 		p.setLocation(100, 200);
@@ -203,7 +214,7 @@ public class ExerciseUser extends JPanel {
 		dinner.setBorderPainted(false);
 		dinner.setContentAreaFilled(false);
 		dinner.setFocusPainted(false);
-		
+
 		// 식단 창 띄우기
 		// 아침
 		morning.addActionListener(new ActionListener() {// 식단 추가 버튼 누르면
@@ -289,7 +300,7 @@ public class ExerciseUser extends JPanel {
 				});
 			}
 		});
-		
+
 		// 패널에 각 버튼 추가
 		p.add(MON);
 		p.add(TUE);
@@ -298,7 +309,7 @@ public class ExerciseUser extends JPanel {
 		p.add(FRI);
 		p.add(SAT);
 		p.add(SUN);
-		
+
 		p.add(dataMon);
 		p.add(dataTue);
 		p.add(dataWed);
@@ -306,7 +317,7 @@ public class ExerciseUser extends JPanel {
 		p.add(dataFri);
 		p.add(dataSat);
 		p.add(dataSun);
-		
+
 		p.add(morning);
 		p.add(lunch);
 		p.add(dinner);
@@ -315,8 +326,19 @@ public class ExerciseUser extends JPanel {
 		// 컴포넌트에 table 추가
 		setLayout(null);
 		p.setLayout(null);
-		
+
 		add(title);
+		add(menuB);
 		add(p);
+	}
+
+
+	private class userExerciseButton implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {	
+			if(e.getSource().equals(menuB)) {
+				
+			}
+		}
 	}
 }
