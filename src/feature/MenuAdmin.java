@@ -14,6 +14,8 @@ import java.awt.FlowLayout;
 
 public class MenuAdmin extends JPanel {
 	
+	JButton userManagementB, noticeB;
+	
 	public MenuAdmin() {
 		setBackground(new Color(204, 204, 255));
 		setLayout(null); // 레이아웃 설정
@@ -34,7 +36,7 @@ public class MenuAdmin extends JPanel {
 		p.setBackground(new Color(204, 204, 255));
 		p.setSize(1000, 800);
 
-		JButton userManagementB = new JButton("회원관리");
+		userManagementB = new JButton("회원관리");
 		userManagementB.setBounds(400, 270, 170, 40);
 		userManagementB.setBorderPainted(false); // 버튼 배경 투명하게
 		userManagementB.setFocusPainted(false); // 버튼 배경 투명하게
@@ -50,7 +52,7 @@ public class MenuAdmin extends JPanel {
 		p.setLayout(null);
 		p.add(userManagementB);
 
-		JButton noticeB = new JButton("공지사항");
+		noticeB = new JButton("공지사항");
 		noticeB.setBounds(400, 400, 170, 40);
 		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
 		noticeB.setFocusPainted(false); // 버튼 배경 투명하게

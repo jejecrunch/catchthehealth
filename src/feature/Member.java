@@ -15,7 +15,9 @@ public class Member {
 	private int fat;
 	private int muscle;
 	private Map<String, String> ptPlan=new LinkedHashMap<>();
+	private Date ptPlanUpDate = new Date();
 	private Map<String, String> ptMeal=new LinkedHashMap<>();
+	private Date ptMealUpDate = new Date();
 	
 	public Member() {
 		
@@ -117,11 +119,16 @@ public class Member {
 	public void setPtMeal(String day, String meal) {
 		ptMeal.put(day, meal);
 	}
-	
-	@Override
-	public String toString() {
-		return "[id=" + id + ", pw=" + pw + ", name=" + name + ", ageRange=" + ageRange + ", phone=" + phone
-				+ ", phone2=" + phone2 + ", email=" + email + ", address=" + address + ", weight=" + weight + ", fat="
-				+ fat + ", muscle=" + muscle + ", ptPlan=" + ptPlan + ", ptMeal=" + ptMeal + "]";
+	public Date getPtPlanUpDate() {
+		return ptPlanUpDate;
+	}
+	public void setPtPlanUpDate(Date date) {
+		this.ptPlanUpDate=date;
+	}
+	public Date getPtMealUpDate() {
+		return ptMealUpDate;
+	}
+	public void setPtMealUpDate(Date date) {
+		this.ptMealUpDate=date;
 	}
 }

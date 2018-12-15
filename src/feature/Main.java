@@ -20,6 +20,9 @@ public class Main extends JFrame implements ActionListener{
 	private MenuAdmin menuad=new MenuAdmin();
 	private ExerciseUser exus;
 	private MemberDAO memdao = MemberDAO.getInstance();
+	
+	private String id;
+	private String pw;
 
 	// 프로그램 실행
 	public static void main(String[] args) {
@@ -44,32 +47,34 @@ public class Main extends JFrame implements ActionListener{
 		login.loginB.addActionListener(this);
 		login.joinB.addActionListener(this);
 		login.findidpwB.addActionListener(this);
-		menuus.userInfoB.addActionListener(this);
-		menuus.noticeB.addActionListener(this);
-		menuus.healthInfoB.addActionListener(this);
-		menuus.exerciseB.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==login.loginB) {
-			String id = login.getId();
-			String pw = login.getPw();
+		id=login.getId();
+		pw=login.getPw();
+		if(e.getSource().equals(login.loginB)) {
 			if(memdao.searchIdPw(id, pw)!=null) {
 				if(memdao.searchAdmin(id, pw)) {
 					cards.show(getContentPane(), "MENU_ADMIN");
+					menuad.userManagementB.addActionListener(new adminEvent());
+					menuad.noticeB.addActionListener(new adminEvent());
 				}
 				else {
 					menuus=new MenuUser(id, pw);
 					getContentPane().add("MENU_USER", menuus);
 					cards.show(getContentPane(), "MENU_USER");
+					menuus.userInfoB.addActionListener(new userEvent());
+					menuus.noticeB.addActionListener(new userEvent());
+					menuus.healthInfoB.addActionListener(new userEvent());
+					menuus.exerciseB.addActionListener(new userEvent());
 				}
 			} else {
 				JOptionPane.showMessageDialog(getContentPane(), "입력하신 아이디나 비밀번호가 틀렸습니다.", "아아디/비밀번호 오류", JOptionPane.WARNING_MESSAGE);
 			}
-		} else if(e.getSource()==login.joinB) {
+		} else if(e.getSource().equals(login.joinB)) {
 			Join join=new Join();
-		} else if(e.getSource()==login.findidpwB) {
+		} else if(e.getSource().equals(login.findidpwB)) {
 			// 아이디 비번 찾기 창 생성
 			final Frame findidpwF = new Frame("아이디 비밀번호 찾기");
 			findidpwF.add(new FindIdPw());
@@ -86,16 +91,40 @@ public class Main extends JFrame implements ActionListener{
 			});
 		}
 	}
-
-	/*public void Ex_u implements ActionListener {
+	
+	private class userEvent implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String id = login.getId();
-			String pw = login.getPw();
-
-			exus=new ExerciseUser(id, pw);
-			getContentPane().add("EX_USER", exus);
-			cards.show(getContentPane(), "EX_USER");
+			id = login.getId();
+			pw = login.getPw();
+			
+			if(e.getSource().equals(menuus.userInfoB)) {
+				
+			} else if(e.getSource().equals(menuus.noticeB)){
+				
+			} else if(e.getSource().equals(menuus.healthInfoB)) {
+				
+			} else if(e.getSource().equals(menuus.exerciseB)) {
+				exus=new ExerciseUser(id, pw);
+				getContentPane().add("EX_USER", exus);
+				cards.show(getContentPane(), "EX_USER");
+			}
 		}
-	}*/
+	}
+	
+	private class adminEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+			
+			if(e.getSource().equals(menuad.userManagementB)) {
+				
+			} else if(e.getSource().equals(menuad.noticeB)){
+				
+			}
+		}
+	}
 }
+
+
