@@ -37,16 +37,20 @@ public class UserInfo extends JPanel{
 	
 
 
-	public UserInfo(Member m) {
+	public UserInfo(String id, String pw) {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,800,1000);
 		setLayout(null);
 		
+		Member m=MemberDAO.getInstance().searchIdPw(id, pw);
+		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(204, 204, 255));
 		frame.getContentPane().setForeground(new Color(0, 0, 0));
 		frame.setSize(1000, 800);
+		frame.setVisible(true); // window를 보여준다.
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -74,9 +78,9 @@ public class UserInfo extends JPanel{
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel(m.getAgeRange());
-		label_2.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		label_2.setBounds(565, 65, 53, 39);
-		label_2.setForeground(new Color(255, 255, 255));
+		label_2.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		label_2.setBounds(565, 65, 60, 39);
+		label_2.setForeground(Color.WHITE);
 		label_2.setBackground(new Color(204, 204, 255));
 		frame.getContentPane().add(label_2);
 		
@@ -110,7 +114,7 @@ public class UserInfo extends JPanel{
 			// 버튼 클릭했을 때
 			@Override
 			public void mousePressed(MouseEvent e) {
-				PayHistory p=new PayHistory();
+				PayHistory p=new PayHistory(m);
 				// 나중에 추가
 			}
 		});
@@ -195,3 +199,5 @@ public class UserInfo extends JPanel{
 		
 	}
 }
+
+

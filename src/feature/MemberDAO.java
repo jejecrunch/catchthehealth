@@ -66,6 +66,14 @@ public class MemberDAO {
 			return false;
 	}
 	
+	public int searchIdPwIndex(String id, String pw) {
+		for(int i=0;i<this.memList.size();i++) {
+			if(this.memList.get(i).getId().equals(id)&&this.memList.get(i).equals(pw))
+				return i;
+		}
+			return -1;
+	}
+	
 	// admin 탐색용 메소드
 	public boolean searchAdmin(String id, String pw) {
 		Member temp=new Member(id,pw);
@@ -76,13 +84,16 @@ public class MemberDAO {
 		return false;
 	}
 
-	@Override
-	public String toString() {
-		String result = "Member List\n";
-		for(int i=0;i<memList.size();i++) {
-			result += memList.get(i).toString()+"\n";
-		}
-		//return "MemberDAO\n" + memList;
-		return result;
+	// 운동 일정 수정하거나 추가하는 메소드
+	public void addModifyPlan(String id, String pw, String day, String time) {
+		this.memList.get(searchIdPwIndex(id,pw)).setPtPlan(day, time);
 	}
+	
+	// 식단 수정하거나 추가하는 메소드
+	public void addModifyMeal(String id, String pw, String day, String morning, String lunch, String dinner) {
+		this.memList.get(searchIdPwIndex(id,pw)).setPtMeal(day, morning);
+		this.memList.get(searchIdPwIndex(id,pw)).setPtMeal(day, lunch);
+		this.memList.get(searchIdPwIndex(id,pw)).setPtMeal(day, dinner);
+	}
+	
 }

@@ -16,10 +16,13 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
-	private MemberDAO memdao = MemberDAO.getInstance();
-	private MenuUser menuus;//멤버에 따라 userinfo가 다르게 나오는 것 호출하기 위해 사용.
+	private MenuUser menuus;
 	private MenuAdmin menuad=new MenuAdmin();
+	private ExerciseUser exus;
+	private MemberDAO memdao = MemberDAO.getInstance();
 	
+	private String id;
+	private String pw;
 
 	// 프로그램 실행
 	public static void main(String[] args) {
@@ -54,11 +57,13 @@ public class Main extends JFrame implements ActionListener{
 			if(memdao.searchIdPw(id, pw)!=null) {
 				if(memdao.searchAdmin(id, pw)) {
 					cards.show(getContentPane(), "MENU_ADMIN");
+					menuad.userManagementB.addActionListener(new adminEvent());
+					menuad.noticeB.addActionListener(new adminEvent());
 				}
 				else {
-					menuus=new MenuUser((memdao.searchIdPw(id, pw)));//멤버에 따라 페이지 호출 다름->여기서 한꺼번에 끌고 들어오기
-					getContentPane().add("MENU_USER", menuus);
 
+					menuus=new MenuUser(id, pw);
+					getContentPane().add("MENU_USER", menuus);
 					cards.show(getContentPane(), "MENU_USER");
 				}
 			} else {
@@ -83,4 +88,40 @@ public class Main extends JFrame implements ActionListener{
 			});
 		}
 	}
+	
+	private class userEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+			
+			if(e.getSource().equals(menuus.userInfoB)) {
+				
+			} else if(e.getSource().equals(menuus.noticeB)){
+				
+			} else if(e.getSource().equals(menuus.healthInfoB)) {
+				
+			} else if(e.getSource().equals(menuus.exerciseB)) {
+				exus=new ExerciseUser(id, pw);
+				getContentPane().add("EX_USER", exus);
+				cards.show(getContentPane(), "EX_USER");
+			}
+		}
+	}
+	
+	private class adminEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+			
+			if(e.getSource().equals(menuad.userManagementB)) {
+				
+			} else if(e.getSource().equals(menuad.noticeB)){
+				
+			}
+		}
+	}
 }
+
+
