@@ -43,8 +43,10 @@ public class MenuAdmin extends JPanel {
 		userManagementB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 
 		userManagementB.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-				// 회원관리 실행
+				UserInfoAdmin userAdmin=new UserInfoAdmin();//회원관리 실행
+
 			}
 		});
 		p.setLayout(null);

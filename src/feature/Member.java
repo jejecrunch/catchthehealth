@@ -15,6 +15,9 @@ public class Member {
 	private int weight;
 	private int fat;
 	private int muscle;
+	private int lockerroom;//락커룸 번호(admin이 지정)
+	
+
 	private Map<String, String> ptPlan = new HashMap<String, String>();
 	private Map<String, String> ptMeal = new HashMap<String, String>();
 	
@@ -112,11 +115,18 @@ public class Member {
 	public void setPtMeal(String day, String meal) {
 		ptMeal.put(day, meal);
 	}
-	
+	public int getLockerroom() {
+		return lockerroom;
+	}
+
+	public void setLockerroom(int lockerroom) {
+		this.lockerroom = lockerroom;
+	}
 	@Override
 	public String toString() {
 		return "[id=" + id + ", pw=" + pw + ", name=" + name + ", ageRange=" + ageRange + ", phone=" + phone
-				+ ", phone2=" + phone2 + ", email=" + email + ", address=" + address + ", weight=" + weight + ", fat="
+				+ ", phone2=" + phone2 + ", email=" + email + ", address=" + address + ", lockerroom="+lockerroom+", weight=" + weight + ", fat="
 				+ fat + ", muscle=" + muscle + ", ptPlan=" + ptPlan + ", ptMeal=" + ptMeal + "]";
 	}
 }
+

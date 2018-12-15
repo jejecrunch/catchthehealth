@@ -16,9 +16,10 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
-	private MenuUser menuus=new MenuUser();
-	private MenuAdmin menuad=new MenuAdmin();
 	private MemberDAO memdao = MemberDAO.getInstance();
+	private MenuUser menuus;//멤버에 따라 userinfo가 다르게 나오는 것 호출하기 위해 사용.
+	private MenuAdmin menuad=new MenuAdmin();
+	
 
 	// 프로그램 실행
 	public static void main(String[] args) {
@@ -31,7 +32,6 @@ public class Main extends JFrame implements ActionListener{
 		getContentPane().setLayout(cards);
 		getContentPane().add("LOGIN", login);
 		getContentPane().add("MENU_ADMIN", menuad);
-		getContentPane().add("MENU_USER", menuus);
 		setSize(1000,800); // window 크기 결정
 		setLocation(100,100); // window 위치 결정
 		setVisible(true); // window를 보여준다.
@@ -56,6 +56,9 @@ public class Main extends JFrame implements ActionListener{
 					cards.show(getContentPane(), "MENU_ADMIN");
 				}
 				else {
+					menuus=new MenuUser((memdao.searchIdPw(id, pw)));//멤버에 따라 페이지 호출 다름->여기서 한꺼번에 끌고 들어오기
+					getContentPane().add("MENU_USER", menuus);
+
 					cards.show(getContentPane(), "MENU_USER");
 				}
 			} else {

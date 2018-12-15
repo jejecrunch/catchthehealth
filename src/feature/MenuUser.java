@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class MenuUser extends JPanel {
 
-	public MenuUser() {
+	public MenuUser(Member m) {//멤버에 따라 호출하기 위해 main에서 불러운 멤버값
 		JPanel p = new JPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -46,7 +46,7 @@ public class MenuUser extends JPanel {
 		userInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 		userInfoB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// UserInfor() 실행
+				UserInfo userInfo= new UserInfo(m);//userinfo 멤버변수 넣어서 화면 전환
 			}
 		});
 		p.add(userInfoB);
