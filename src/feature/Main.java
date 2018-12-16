@@ -18,6 +18,7 @@ public class Main extends JFrame implements ActionListener{
 	private Login login=new Login();
 	private MenuUser menuus;
 	private MenuAdmin menuad=new MenuAdmin();
+	private UserInfo userinfo;
 	private ExerciseUser exus;
 	private MemberDAO memdao = MemberDAO.getInstance();
 	
@@ -52,19 +53,21 @@ public class Main extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==login.loginB) {
-			String id = login.getId();
-			String pw = login.getPw();
+			id = login.getId();
+			pw = login.getPw();
 			if(memdao.searchIdPw(id, pw)!=null) {
 				if(memdao.searchAdmin(id, pw)) {
 					cards.show(getContentPane(), "MENU_ADMIN");
 					menuad.userManagementB.addActionListener(new adminEvent());
 					menuad.noticeB.addActionListener(new adminEvent());
-				}
-				else {
-
+				} else {
 					menuus=new MenuUser(id, pw);
 					getContentPane().add("MENU_USER", menuus);
 					cards.show(getContentPane(), "MENU_USER");
+					menuus.userInfoB.addActionListener(new userEvent());
+					menuus.healthInfoB.addActionListener(new userEvent());
+					menuus.exerciseB.addActionListener(new userEvent());
+					menuus.noticeB.addActionListener(new userEvent());
 				}
 			} else {
 				JOptionPane.showMessageDialog(getContentPane(), "입력하신 아이디나 비밀번호가 틀렸습니다.", "아아디/비밀번호 오류", JOptionPane.WARNING_MESSAGE);
@@ -94,12 +97,12 @@ public class Main extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			id = login.getId();
 			pw = login.getPw();
-			
+
 			if(e.getSource().equals(menuus.userInfoB)) {
-				
-			} else if(e.getSource().equals(menuus.noticeB)){
-				
+				userinfo = new UserInfo(id, pw);
 			} else if(e.getSource().equals(menuus.healthInfoB)) {
+				
+			} else if(e.getSource().equals(menuus.noticeB)) {
 				
 			} else if(e.getSource().equals(menuus.exerciseB)) {
 				exus=new ExerciseUser(id, pw);

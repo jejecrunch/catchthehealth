@@ -12,16 +12,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MenuUser extends JPanel {
-	
+
+	private CardLayout cards=new CardLayout(0,0);
+	private SliderMenuUser userSlider;
 	private ExerciseUser exus;
 	JButton userInfoB, healthInfoB, exerciseB, noticeB;
-	private MemberDAO memdao = MemberDAO.getInstance();
 
-//<<<<<<< HEAD
-
-//=======
 	public MenuUser(String id, String pw) {
-//>>>>>>> branch 'dev' of https://github.com/jejecrunch/catchthehealth.git
 		JPanel p = new JPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -53,11 +50,6 @@ public class MenuUser extends JPanel {
 		userInfoB.setBounds(400, 160, 170, 40); // 버튼 배치
 		userInfoB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
 		userInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
-		userInfoB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				UserInfo userInfo= new UserInfo(id,pw);//userinfo 멤버변수 넣어서 화면 전환
-			}
-		});
 		p.add(userInfoB);
 
 		healthInfoB = new JButton("건강정보");
@@ -67,12 +59,6 @@ public class MenuUser extends JPanel {
 		healthInfoB.setBounds(400, 270, 170, 40); // 버튼 배치
 		healthInfoB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
 		healthInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
-
-		healthInfoB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// HealthInfor() 실행
-			}
-		});
 		p.add(healthInfoB);
 
 		exerciseB = new JButton("운동일정");
@@ -91,13 +77,8 @@ public class MenuUser extends JPanel {
 		noticeB.setBounds(400, 520, 170, 40); // 버튼 배치
 		noticeB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
 		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
-
-		noticeB.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Notice() 실행
-				Notice notice = new Notice();
-			}
-		});
+		
+		
 		setLayout(null);
 		p.setLayout(null);
 		p.add(noticeB);

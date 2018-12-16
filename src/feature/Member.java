@@ -125,15 +125,9 @@ public class Member {
 	public int getLockerroom() {
 		return lockerroom;
 	}
-
 	public void setLockerroom(int lockerroom) {
 		this.lockerroom = lockerroom;
 	}
-	@Override
-	public String toString() {
-		return "[id=" + id + ", pw=" + pw + ", name=" + name + ", ageRange=" + ageRange + ", phone=" + phone
-				+ ", phone2=" + phone2 + ", email=" + email + ", address=" + address + ", lockerroom="+lockerroom+", weight=" + weight + ", fat="
-				+ fat + ", muscle=" + muscle + ", ptPlan=" + ptPlan + ", ptMeal=" + ptMeal + "]";}
 	public Date getPtPlanUpDate() {
 		return ptPlanUpDate;
 	}

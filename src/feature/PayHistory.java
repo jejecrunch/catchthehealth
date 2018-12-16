@@ -97,7 +97,7 @@ public class PayHistory extends JPanel {
 		((DefaultTableCellRenderer)payTable.getDefaultRenderer(Object.class)).setOpaque(false);
 
 		JScrollPane scP = new JScrollPane(payTable);
-		scP.setBounds(0, 0, 780, 508);
+		scP.setBounds(0, 0, 700, 508);
 		scP.setBackground(new Color(255, 255, 255));
 		scP.getViewport().setOpaque(false);
 		scP.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

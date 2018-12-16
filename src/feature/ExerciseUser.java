@@ -10,9 +10,7 @@ public class ExerciseUser extends JPanel {
 	private MemberDAO memdao = MemberDAO.getInstance();
 	private Member person;
 	private JFrame newWindow;
-	private ImageIcon menu = new ImageIcon("./images/menuButton.png");
 
-	JButton menuB;
 
 	// 어플리케이션 생성
 	public ExerciseUser(String id, String pw) {
@@ -29,14 +27,6 @@ public class ExerciseUser extends JPanel {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setForeground(new Color(255, 255, 255));
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-
-		// 메뉴 버튼
-		menuB=new JButton(menu);
-		menuB.setBounds(900, 25, 35, 33);
-		menuB.setBorderPainted(false);
-		menuB.setFocusPainted(false);
-		menuB.setContentAreaFilled(false);
-		menuB.addActionListener(new userExerciseButton());
 
 		// 운동 일정 테이블
 		// 운동 일정 테이블의 데이터값과 데이터가 어떤 것인지 알려주는 column 값으로 모델 생성
@@ -328,17 +318,6 @@ public class ExerciseUser extends JPanel {
 		p.setLayout(null);
 
 		add(title);
-		add(menuB);
 		add(p);
-	}
-
-
-	private class userExerciseButton implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {	
-			if(e.getSource().equals(menuB)) {
-				
-			}
-		}
 	}
 }
