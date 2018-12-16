@@ -1,24 +1,23 @@
 package feature;
 
-// 임시 파일에는 제대로 실행되나 옮기니 menu JLbael이 안 보임. 저장용으로 잠시 올림.
-
 import java.awt.Color;
-
+import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import javax.swing.JButton;
 
 public class SliderMenuUser extends JPanel {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("SliderMenuUser");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100,100,1000, 800);
+		frame.setSize(1000, 800);
 		frame.setBackground(new Color(204, 204, 255));
 		SliderMenuUser sliderMenuUser = new SliderMenuUser(); 
 		frame.getContentPane().add(sliderMenuUser);
@@ -29,18 +28,79 @@ public class SliderMenuUser extends JPanel {
 	public SliderMenuUser() {
 		setLayout(null); // 레이아웃 설정
 		setBackground(new Color(204, 204, 255));
-		
+
 		JLabel menu = new JLabel("");
-		menu.setIcon(new ImageIcon("../images/menuButton.png"));
+		menu.setIcon(new ImageIcon("./images/menuButton.png"));
 		menu.setBounds(880, 20, 50, 40);		
 		add(menu);
 
 		JLabel sbar = new JLabel("");
-		sbar.setIcon(new ImageIcon("../images/userSbar.png"));
+		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
 		sbar.setBounds(0, 0, 1000, 800);		
 		sbar.setVisible(false);
 		add(sbar);
+
+		// sbar에 있는 메뉴 버튼 구성
+		JButton userInfoB = new JButton("회원정보");
+		userInfoB.setBorderPainted(false); // 버튼 배경 투명하게
+		userInfoB.setFocusPainted(false); // 버튼 배경 투명하게
+		userInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		userInfoB.setBounds(710, 200, 170, 40); 
+		userInfoB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		userInfoB.setFont(new Font("맑은고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		userInfoB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userInfoB.setForeground(new Color(105, 74, 151));
+				// userInfor() 실행
+			}
+		});
+		sbar.add(userInfoB);
 		
+		JButton healthInfoB = new JButton("건강정보");
+		healthInfoB.setBorderPainted(false); // 버튼 배경 투명하게
+		healthInfoB.setFocusPainted(false); // 버튼 배경 투명하게
+		healthInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		healthInfoB.setBounds(710, 320, 170, 40); // 버튼 배치
+		healthInfoB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		healthInfoB.setFont(new Font("맑은고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		healthInfoB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				healthInfoB.setForeground(new Color(105, 74, 151));
+				// HealthInfor() 실행
+			}
+		});
+		sbar.add(healthInfoB);
+
+		JButton exerciseB = new JButton("운동일정");
+		exerciseB.setBorderPainted(false); // 버튼 배경 투명하게
+		exerciseB.setFocusPainted(false); // 버튼 배경 투명하게
+		exerciseB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		exerciseB.setBounds(710, 460, 170, 40); // 버튼 배치
+		exerciseB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		exerciseB.setFont(new Font("맑은고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		exerciseB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exerciseB.setForeground(new Color(105, 74, 151));
+				// Exercise() 실행
+			}
+		});
+		sbar.add(exerciseB);
+
+		JButton noticeB = new JButton("공지사항");
+		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
+		noticeB.setFocusPainted(false); // 버튼 배경 투명하게
+		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		noticeB.setBounds(710, 580, 170, 40); // 버튼 배치
+		noticeB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		noticeB.setFont(new Font("맑은고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		noticeB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				noticeB.setForeground(new Color(105, 74, 151));
+				// Notice() 실행
+			}
+		});
+		sbar.add(noticeB);	
+
 		// menu 눌렀을 때 sbar가 나오도록 함
 		menu.addMouseListener(new MouseAdapter() {
 			@Override
@@ -48,7 +108,7 @@ public class SliderMenuUser extends JPanel {
 				active(menu, sbar);
 			}
 		});
-		
+
 		// 화면을 눌렀을 때 sbar에 빠져 나오도록 함
 		JLabel background = new JLabel("");
 		background.setBounds(0, 0, 600, 800);
@@ -76,6 +136,4 @@ public class SliderMenuUser extends JPanel {
 		sbar.setVisible(true);
 		sbar.setEnabled(true);				
 	}
-
-
 }
