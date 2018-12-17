@@ -47,7 +47,7 @@ public class MenuUser extends JPanel {
 		userInfoB.setContentAreaFilled(false); // 버튼 투명하게
 		userInfoB.setBounds(420, 200, 170, 40); // 버튼 배치
 		userInfoB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
-		userInfoB.setFont(new Font("Calibri", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
+		userInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 		userInfoB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// UserInfor() 실행
@@ -61,7 +61,7 @@ public class MenuUser extends JPanel {
 		healthInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		healthInfoB.setBounds(420, 320, 170, 40); // 버튼 배치
 		healthInfoB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
-		healthInfoB.setFont(new Font("Calibri", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
+		healthInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 
 		healthInfoB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +76,7 @@ public class MenuUser extends JPanel {
 		exerciseB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		exerciseB.setBounds(420, 460, 170, 40); // 버튼 배치
 		exerciseB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
-		exerciseB.setFont(new Font("Calibri", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
+		exerciseB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 
 		exerciseB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,7 +91,7 @@ public class MenuUser extends JPanel {
 		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		noticeB.setBounds(420, 580, 170, 40); // 버튼 배치
 		noticeB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
-		noticeB.setFont(new Font("Calibri", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
+		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 
 		noticeB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
