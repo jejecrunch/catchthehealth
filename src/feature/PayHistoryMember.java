@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-public class PayHistory extends JPanel {
+public class PayHistoryMember extends JPanel {
 	
 	private JTable payTable;
 	private DefaultTableModel payModel; 
@@ -16,7 +16,7 @@ public class PayHistory extends JPanel {
 	private String idName;
 	
 	// 어플리케이션 생성
-	public PayHistory(Member m) {
+	public PayHistoryMember(Member m) {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,800,800);
@@ -54,8 +54,7 @@ public class PayHistory extends JPanel {
 		frame.getContentPane().add(name);
 
 
-		// 운동 일정 테이블
-		// 운동 일정 테이블의 데이터값과 데이터가 어떤 것인지 알려주는 column 값으로 모델 생성
+	
 		payModel = new DefaultTableModel(payHistoryContents, column);
 		JPanel pay = new JPanel();
 		pay.setBackground(new Color(255,255,255));
