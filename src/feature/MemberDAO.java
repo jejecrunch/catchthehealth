@@ -16,6 +16,7 @@ public class MemberDAO {
 		
 	}
 	
+	
 	// 객체 생성 제한 → static 메소드 준비
 	public static MemberDAO getInstance() {
 		if(memberdao==null)

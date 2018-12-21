@@ -28,6 +28,19 @@ public class HealthInfo extends JPanel {
 		frame.getContentPane().add(healthInforInsert);
 		frame.setResizable(false); // 창 크기 고정
 		frame.setVisible(true);
+		
+		
+		JPanel weight = new JPanel();
+		weight.setBackground(new Color(236,236,255));
+		weight.setBounds(166, 143, 651, 247);
+		frame.getContentPane().add(weight);
+		
+		
+		JPanel muscle_fat = new JPanel();
+		muscle_fat.setBounds(166, 448, 651, 253);
+		muscle_fat.setBackground(new Color(236,236,255));
+		frame.getContentPane().add(muscle_fat);
+	
 	}
 
 	public HealthInfo() {
