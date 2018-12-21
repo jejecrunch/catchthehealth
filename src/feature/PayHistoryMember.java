@@ -10,7 +10,6 @@ public class PayHistoryMember extends JPanel {
 	private DefaultTableModel payModel; 
 	private String[] column = {"no","date","subject","price"};
 	private String[][] payHistoryContents= {};
-
 	
 	private JLabel name;
 	private String idName;
@@ -19,7 +18,7 @@ public class PayHistoryMember extends JPanel {
 	public PayHistoryMember(Member m) {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
-		setBounds(100,100,800,800);
+		setBounds(100,100,800,600);
 		setLayout(null);
 
 		// 보면서 확인하는 용

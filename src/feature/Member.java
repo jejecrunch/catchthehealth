@@ -11,12 +11,11 @@ public class Member {
 	private String phone2;
 	private String email;
 	private String address;
-	private int weight;
-	private int fat;
-	private int muscle;
+	private Map<Date, Integer> weight=new LinkedHashMap<>();
+	private Map<Date, Integer> fat=new LinkedHashMap<>();
+	private Map<Date, Integer> muscle=new LinkedHashMap<>();
+	private String clothesSize=null; // 운동복 사이즈 지정
 	private int lockerroom;//락커룸 번호(admin이 지정)
-	
-
 	private Map<String, String> ptPlan=new LinkedHashMap<>();
 	private Date ptPlanUpDate = new Date();
 	private Map<String, String> ptMeal=new LinkedHashMap<>();
@@ -86,23 +85,23 @@ public class Member {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getWeight() {
-		return weight;
+	public int getWeight(Date when) {
+		return weight.get(when);
 	}
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setWeight(Date when, int value) {
+		weight.put(when, value);
 	}
-	public int getFat() {
-		return fat;
+	public int getFat(Date when) {
+		return fat.get(when);
 	}
-	public void setFat(int fat) {
-		this.fat = fat;
+	public void setFat(Date when, int value) {
+		fat.put(when, value);
 	}
-	public int getMuscle() {
-		return muscle;
+	public int getMuscle(Date when) {
+		return muscle.get(when);
 	}
-	public void setMuscle(int muscle) {
-		this.muscle = muscle;
+	public void setMuscle(Date when, int value) {
+		muscle.put(when, value);
 	}
 	public String getPtPlan(String day) {
 		return ptPlan.get(day);
@@ -127,6 +126,12 @@ public class Member {
 	}
 	public void setLockerroom(int lockerroom) {
 		this.lockerroom = lockerroom;
+	}
+	public String getClothesSize() {
+		return clothesSize;
+	}
+	public void setClothesSize(String clothesSize) {
+		this.clothesSize = clothesSize;
 	}
 	public Date getPtPlanUpDate() {
 		return ptPlanUpDate;

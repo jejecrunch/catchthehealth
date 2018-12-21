@@ -1,6 +1,5 @@
 package feature;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -21,17 +20,10 @@ import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-
-
-
 public class UserInfoAdmin extends JPanel {
 
-	private JFrame frame;
-	private JLabel label;
 	private int memberNo=0;
 	private String[] column= {"No.","Full Name","Age Range","PT","Show View"};
-
-
 
 	private MemberDAO members = MemberDAO.getInstance();
 	private Object[][] memberList= new Object[members.count()-1][6];
@@ -39,36 +31,17 @@ public class UserInfoAdmin extends JPanel {
 	private JLabel[][] memberLabel;
 	private JScrollPane scP;
 
-
 	public UserInfoAdmin() {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,1000,800);
 		setLayout(null);
 
-		frame = new JFrame("회원정보_Admin");
-		frame.getContentPane().setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		frame.getContentPane().setBackground(new Color(204, 204, 255));
-		frame.getContentPane().setForeground(new Color(255, 255, 255));
-		frame.setSize(1000,800); // window 크기 결정
-		frame.setLocation(0,0); // window 위치 결정
-		frame.setForeground(new Color(204, 204, 255));
-		frame.setBackground(new Color(255, 255, 255));
-		frame.setVisible(true); // window를 보여준다.
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기 누르면 메모리 해제
-		frame.getContentPane().setLayout(null);
-
-
-
-
-
-		label=new JLabel();
-		label.setFont(new Font("맑은 고딕", Font.BOLD, 40));
-		label.setText("회원 정보");
-		label.setForeground(new Color(255,255,255));
-		label.setBackground(new Color(204,204,255));
-		label.setBounds(10,0,244,100);
-		frame.add(label);
+		JLabel title=new JLabel("회원정보");
+		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		title.setForeground(new Color(255,255,255));
+		title.setBackground(new Color(204,204,255));
+		title.setBounds(14, 12, 150, 50);
 
 		if(members.count()!=0) {
 			Member s;
@@ -88,10 +61,8 @@ public class UserInfoAdmin extends JPanel {
 			}
 		}
 
-
-
 		scP = new JScrollPane();
-		scP.setBounds(108, 112, 780, 508);
+		scP.setBounds(155, 100, 780, 508);
 		scP.setBackground(new Color(255, 255, 255));
 
 		scP.setOpaque(false);
@@ -101,19 +72,14 @@ public class UserInfoAdmin extends JPanel {
 		scP.setForeground(new Color(204, 204, 255));
 		scP.setPreferredSize(new Dimension(0, 0));
 		scP.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scP.setOpaque(false);
-		scP.getViewport().setOpaque(false);
-		scP.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scP.setPreferredSize(new Dimension(0, 0));
 		scP.setBorder(null);
-
 
 		columnLabel=new JLabel[column.length];
 		int widthSize=0;
 		int heightSize = 0;
 		for(int i=0;i<column.length;i++) {
 			columnLabel[i]=new JLabel();
-			columnLabel[i].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+			columnLabel[i].setFont(new Font("맑은 고딕", Font.BOLD, 18));
 			columnLabel[i].setText(column[i]);
 			columnLabel[i].setBackground(new Color(255, 255, 255));
 			columnLabel[i].setForeground(new Color(204, 204, 255));
@@ -131,7 +97,7 @@ public class UserInfoAdmin extends JPanel {
 			widthSize=0;
 			for(int j=0;j<column.length-1;j++) {
 				memberLabel[i][j]=new JLabel();
-				memberLabel[i][j].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+				memberLabel[i][j].setFont(new Font("맑은 고딕", Font.BOLD, 18));
 				memberLabel[i][j].setText(String.valueOf(memberList[i][j]));
 				memberLabel[i][j].setForeground(new Color(255,255,255));
 				memberLabel[i][j].setBackground(new Color(204,204,255));
@@ -145,7 +111,7 @@ public class UserInfoAdmin extends JPanel {
 			String pw=(String) memberList[i][5];
 			
 			button[i]=new JButton();
-			button[i].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+			button[i].setFont(new Font("맑은 고딕", Font.BOLD, 18));
 			button[i].setText(String.valueOf(memberList[i][4]));
 			button[i].setForeground(new Color(255,255,255));
 			button[i].setBackground(new Color(204,204,255));
@@ -186,15 +152,11 @@ public class UserInfoAdmin extends JPanel {
 
 		}
 
-		frame.getContentPane().add(scP);
+		add(title);
+		add(scP);
 
-
-
-		frame.revalidate();
-		frame.repaint();
-
-
-
+		revalidate();
+		repaint();
 
 	}
 

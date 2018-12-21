@@ -11,7 +11,6 @@ public class ExerciseUser extends JPanel {
 	private Member person;
 	private JFrame newWindow;
 
-
 	// 어플리케이션 생성
 	public ExerciseUser(String id, String pw) {
 		person=memdao.searchIdPw(id, pw);
@@ -291,7 +290,7 @@ public class ExerciseUser extends JPanel {
 			}
 		});
 
-		// 패널에 각 버튼 추가
+		// 패널에 각 요소들 추가
 		p.add(MON);
 		p.add(TUE);
 		p.add(WED);
@@ -313,10 +312,11 @@ public class ExerciseUser extends JPanel {
 		p.add(dinner);
 		p.repaint();
 
-		// 컴포넌트에 table 추가
+		// 레이아웃 없애기
 		setLayout(null);
 		p.setLayout(null);
 
+		// 컴포넌트에 title과 패널 추간
 		add(title);
 		add(p);
 	}

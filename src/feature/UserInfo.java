@@ -1,97 +1,67 @@
 package feature;
 
-import java.awt.EventQueue;
-import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JList;
-import javax.swing.JTextPane;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class UserInfo extends JPanel{
 
-	private JFrame frame;
-	private JLabel photo;
-	private JLabel infoL;
-	private JPanel panel;
 
-	private JScrollPane scroll;
-	
-	public UserInfo(String id, String pw) {
+	public UserInfo(Member member) {
 		setForeground(new Color(255, 255, 255));
 		setBackground(new Color(204, 204, 255));
-		setBounds(100,100,800,1000);
-		setLayout(null);
-		
-		Member member=MemberDAO.getInstance().searchIdPw(id, pw);
-		
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(204, 204, 255));
-		frame.getContentPane().setForeground(new Color(0, 0, 0));
-		frame.setBounds(200,200,1000, 800);
-		frame.setVisible(true); // window를 보여준다.
+		setBounds(0,0,1000,800);
 
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				frame.setVisible(false);
-				frame.dispose();
-			}
-		});
-		frame.getContentPane().setLayout(null);
+		JLabel title = new JLabel("회원정보");//회원정보
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setForeground(new Color(255, 255, 255));
+		title.setBackground(new Color(204, 204, 255));
+		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		title.setBounds(14, 12, 150, 50);
 		
-		photo = new JLabel("●");//사진
+		JPanel p = new JPanel();
+		p.setForeground(new Color(255, 255, 255));
+		p.setBackground(new Color(204, 204, 255));
+		p.setLocation(175, 40);
+		p.setSize(650, 700);
+		
+		JLabel photo = new JLabel("●");//사진
 		photo.setHorizontalAlignment(SwingConstants.CENTER);
 		photo.setForeground(new Color(255, 255, 255));
 		photo.setBackground(new Color(204, 204, 255));
-		photo.setFont(new Font("맑은 고딕", Font.BOLD, 99));
-		photo.setBounds(275, 65, 148, 157 );
-		frame.getContentPane().add(photo);
-
-		infoL = new JLabel("회원정보");//회원정보
-		infoL.setForeground(new Color(255, 255, 255));
-		infoL.setBackground(new Color(204, 204, 255));
-		infoL.setFont(new Font("맑은 고딕", Font.BOLD, 41));
-		infoL.setBounds(38, 10, 238, 112 );
-		frame.getContentPane().add(infoL);
+		photo.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		photo.setBounds(30, 30, 150, 150);
 		
 		JLabel userName = new JLabel(member.getName());//회원이름
-		userName.setFont(new Font("맑은 고딕", Font.BOLD, 21));
-		userName.setBounds(464, 65, 125, 57);
+		userName.setHorizontalAlignment(SwingConstants.CENTER);
+		userName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		userName.setBounds(200, 30, 150, 50);
 		userName.setForeground(new Color(255, 255, 255));
 		userName.setBackground(new Color(204, 204, 255));
-		frame.getContentPane().add(userName);
-		
+
 		JLabel userAge = new JLabel();
-		userAge.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		userAge.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		userAge.setText(member.getAgeRange());
-		userAge.setBounds(623, 65, 133, 57);
+		userAge.setBounds(350, 30, 150, 50);
 		userAge.setForeground(Color.WHITE);
 		userAge.setBackground(new Color(204, 204, 255));
-		frame.getContentPane().add(userAge);
-		
+
+		JLabel availableTime = new JLabel("이용가능기간");
+		availableTime.setVerticalAlignment(SwingConstants.BOTTOM);
+		availableTime.setHorizontalAlignment(SwingConstants.CENTER);
+		availableTime.setForeground(Color.WHITE);
+		availableTime.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		availableTime.setBackground(new Color(204, 204, 255));
+		availableTime.setBounds(200, 80, 150, 50);
+
 		JLabel validTime = new JLabel("기간~//payhistory에서 가져올 예정");
-		validTime.setHorizontalAlignment(SwingConstants.TRAILING);
-		validTime.setFont(new Font("맑은 고딕", Font.BOLD, 19));
-		validTime.setBounds(464, 185, 292, 49);
+		validTime.setVerticalAlignment(SwingConstants.TOP);
+		validTime.setHorizontalAlignment(SwingConstants.CENTER);
+		validTime.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		validTime.setBounds(250, 135, 400, 50);
 		validTime.setForeground(new Color(255, 255, 255));
 		validTime.setBackground(new Color(204, 204, 255));
-		frame.getContentPane().add(validTime);
-		
+
 		JButton payhistoryB = new JButton("결제내역 ");//누르면 payhistory로 넘어감
 		payhistoryB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -118,89 +88,111 @@ public class UserInfo extends JPanel{
 				// 나중에 추가
 			}
 		});
-
-		payhistoryB.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		payhistoryB.setBounds(257, 242, 512, 49);
+		payhistoryB.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		payhistoryB.setBounds(30, 200, 590, 50);
 		payhistoryB.setForeground(new Color(255, 255, 255));
 		payhistoryB.setBackground(new Color(204, 204, 255));
-        payhistoryB.setBorderPainted(false);
-        payhistoryB.setFocusPainted(false);
-		frame.getContentPane().add(payhistoryB);
+		payhistoryB.setBorderPainted(false);
+		payhistoryB.setFocusPainted(false);
 		
-		JLabel availableTime = new JLabel("이용가능기간");
-		availableTime.setForeground(Color.WHITE);
-		availableTime.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		availableTime.setBackground(new Color(204, 204, 255));
-		availableTime.setBounds(464, 136, 146, 39);
-		frame.getContentPane().add(availableTime);
-		
+
 		JLabel payDateL = new JLabel("최근 결제일");
+		payDateL.setHorizontalAlignment(SwingConstants.LEFT);
 		payDateL.setForeground(Color.WHITE);
-		payDateL.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		payDateL.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		payDateL.setBackground(new Color(204, 204, 255));
-		payDateL.setBounds(275, 313, 224, 32);
-		frame.getContentPane().add(payDateL);
-		
+		payDateL.setBounds(40, 270, 150, 50);
+
 		JLabel payDate = new JLabel("최근 결제 날짜");
 		payDate.setForeground(Color.WHITE);
-		payDate.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+		payDate.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		payDate.setBackground(new Color(204, 204, 255));
-		payDate.setBounds(316, 355, 200, 57);
-		frame.getContentPane().add(payDate);
-		
+		payDate.setBounds(50, 300, 150, 50);
+
 		JLabel address = new JLabel("주소");
 		address.setForeground(Color.WHITE);
-		address.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		address.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		address.setBackground(new Color(204, 204, 255));
-		address.setBounds(275, 422, 224, 39);
-		frame.getContentPane().add(address);
-		
+		address.setBounds(40, 370, 150, 50);
+
 		JLabel addressM = new JLabel(member.getAddress());
+		addressM.setHorizontalAlignment(SwingConstants.RIGHT);
 		addressM.setForeground(Color.WHITE);
-		addressM.setFont(new Font("맑은 고딕", Font.PLAIN, 25));
+		addressM.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		addressM.setBackground(new Color(204, 204, 255));
-		addressM.setBounds(316, 472, 188, 49);
-		frame.getContentPane().add(addressM);
+		addressM.setBounds(40, 410, 575, 50);
+
+		JLabel trainingClothesL = new JLabel("운동복");
+		trainingClothesL.setHorizontalAlignment(SwingConstants.LEFT);
+		trainingClothesL.setForeground(Color.WHITE);
+		trainingClothesL.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		trainingClothesL.setBackground(new Color(204, 204, 255));
+		trainingClothesL.setBounds(40, 475, 150, 50);
 		
-		
+		JLabel trainingClothes = new JLabel(String.valueOf(member.getClothesSize()));
+		trainingClothes.setHorizontalAlignment(SwingConstants.LEFT);
+		trainingClothes.setForeground(Color.WHITE);
+		trainingClothes.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		trainingClothes.setBackground(new Color(204, 204, 255));
+		trainingClothes.setBounds(50, 510, 565, 50);
 		
 		JLabel lockerRoomL = new JLabel("락커룸");
+		lockerRoomL.setHorizontalAlignment(SwingConstants.LEFT);
 		lockerRoomL.setForeground(Color.WHITE);
-		lockerRoomL.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		lockerRoomL.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lockerRoomL.setBackground(new Color(204, 204, 255));
-		lockerRoomL.setBounds(275, 531, 224, 32);
-		frame.getContentPane().add(lockerRoomL);
-		
-		JLabel lockerRoomNumber = new JLabel(String.valueOf(member.getLockerroom()));//회원 락커룸 번호
+		lockerRoomL.setBounds(40, 590, 150, 50);
+
+		JLabel lockerRoomNumber = new JLabel("NO. "+String.valueOf(member.getLockerroom()));//회원 락커룸 번호
 		lockerRoomNumber.setForeground(Color.WHITE);
-		lockerRoomNumber.setFont(new Font("맑은 고딕", Font.PLAIN, 25));
+		lockerRoomNumber.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		lockerRoomNumber.setBackground(new Color(204, 204, 255));
-		lockerRoomNumber.setBounds(313, 572, 111, 57);
-		frame.getContentPane().add(lockerRoomNumber);
-		
+		lockerRoomNumber.setBounds(50, 620, 150, 50);
+
 		JLabel priceL = new JLabel("결제 금액");
+		priceL.setHorizontalAlignment(SwingConstants.LEFT);
 		priceL.setForeground(Color.WHITE);
-		priceL.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		priceL.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		priceL.setBackground(new Color(204, 204, 255));
-		priceL.setBounds(528, 313, 182, 32);
-		frame.getContentPane().add(priceL);
-		
+		priceL.setBounds(300, 270, 150, 50);
+
 		JLabel price = new JLabel("가격"+"₩");
 		price.setHorizontalAlignment(SwingConstants.TRAILING);
 		price.setForeground(Color.WHITE);
-		price.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
+		price.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		price.setBackground(new Color(204, 204, 255));
-		price.setBounds(528, 353, 228, 57);
-		frame.getContentPane().add(price);
+		price.setBounds(415, 300, 200, 50);
 		
 		JLabel lockerRoomPw = new JLabel(member.getPw());//비밀번호 불러옴
 		lockerRoomPw.setHorizontalAlignment(SwingConstants.TRAILING);
 		lockerRoomPw.setForeground(Color.WHITE);
-		lockerRoomPw.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+		lockerRoomPw.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		lockerRoomPw.setBackground(new Color(204, 204, 255));
-		lockerRoomPw.setBounds(528, 551, 228, 78);
-		frame.getContentPane().add(lockerRoomPw);
+		lockerRoomPw.setBounds(390, 620, 228, 50);
 		
+		p.add(photo);
+		p.add(userName);
+		p.add(userAge);
+		p.add(availableTime);
+		p.add(validTime);
+		p.add(payhistoryB);
+		p.add(payDate);
+		p.add(payDateL);
+		p.add(address);
+		p.add(addressM);
+		p.add(trainingClothesL);
+		p.add(trainingClothes);
+		p.add(lockerRoomL);
+		p.add(lockerRoomNumber);
+		p.add(priceL);
+		p.add(price);
+		p.add(lockerRoomPw);
+		
+		add(title);
+		add(p);
+		
+		setLayout(null);
+		p.setLayout(null);
 	}
 }
 
