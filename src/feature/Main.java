@@ -23,7 +23,6 @@ public class Main extends JFrame implements ActionListener{
 	private ExerciseUser exus;
 	private Member cur_user;
 	private MemberDAO memdao = MemberDAO.getInstance();
-	
 	private String id;
 	private String pw;
 
