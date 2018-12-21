@@ -78,7 +78,6 @@ public class MenuUser extends JPanel {
 		noticeB.setForeground(new Color(255, 255, 255)); // 버튼 글씨 색상
 		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 27)); // 버튼 폰트, 크기 설정
 		
-		
 		setLayout(null);
 		p.setLayout(null);
 		p.add(noticeB);

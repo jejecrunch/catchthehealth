@@ -16,18 +16,13 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
-
-
-	
 	private MenuUser menuus;
 	private MenuAdmin menuad=new MenuAdmin();
 	private UserInfo userinfo;
+	private UserInfoAdmin userinfo_ad;
 	private ExerciseUser exus;
-
+	private Member cur_user;
 	private MemberDAO memdao = MemberDAO.getInstance();
-
-
-	
 	private String id;
 	private String pw;
 
@@ -103,9 +98,12 @@ public class Main extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			id = login.getId();
 			pw = login.getPw();
+			cur_user = memdao.searchIdPw(id, pw);
 
 			if(e.getSource().equals(menuus.userInfoB)) {
-				userinfo = new UserInfo(id, pw);
+				userinfo=new UserInfo(cur_user);
+				getContentPane().add("USER_INFO", userinfo);
+				cards.show(getContentPane(), "USER_INFO");
 			} else if(e.getSource().equals(menuus.healthInfoB)) {
 				
 			} else if(e.getSource().equals(menuus.noticeB)) {
@@ -125,7 +123,9 @@ public class Main extends JFrame implements ActionListener{
 			pw = login.getPw();
 			
 			if(e.getSource().equals(menuad.userManagementB)) {
-				
+				userinfo_ad = new UserInfoAdmin();
+				getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
+				cards.show(getContentPane(), "USER_INFO_ADMIN");
 			} else if(e.getSource().equals(menuad.noticeB)){
 				
 			}
