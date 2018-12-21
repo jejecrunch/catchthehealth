@@ -18,20 +18,20 @@ public class UserInfo extends JPanel{
 		title.setBackground(new Color(204, 204, 255));
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		title.setBounds(14, 12, 150, 50);
-		
+
 		JPanel p = new JPanel();
 		p.setForeground(new Color(255, 255, 255));
 		p.setBackground(new Color(204, 204, 255));
 		p.setLocation(175, 40);
 		p.setSize(650, 700);
-		
+
 		JLabel photo = new JLabel("●");//사진
 		photo.setHorizontalAlignment(SwingConstants.CENTER);
 		photo.setForeground(new Color(255, 255, 255));
 		photo.setBackground(new Color(204, 204, 255));
 		photo.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		photo.setBounds(30, 30, 150, 150);
-		
+
 		JLabel userName = new JLabel(member.getName());//회원이름
 		userName.setHorizontalAlignment(SwingConstants.CENTER);
 		userName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
@@ -84,7 +84,7 @@ public class UserInfo extends JPanel{
 			// 버튼 클릭했을 때
 			@Override
 			public void mousePressed(MouseEvent e) {
-				PayHistoryMember p=new PayHistoryMember(member);
+				PayHistoryUser p=new PayHistoryUser(member);
 				// 나중에 추가
 			}
 		});
@@ -94,7 +94,7 @@ public class UserInfo extends JPanel{
 		payhistoryB.setBackground(new Color(204, 204, 255));
 		payhistoryB.setBorderPainted(false);
 		payhistoryB.setFocusPainted(false);
-		
+
 
 		JLabel payDateL = new JLabel("최근 결제일");
 		payDateL.setHorizontalAlignment(SwingConstants.LEFT);
@@ -128,14 +128,14 @@ public class UserInfo extends JPanel{
 		trainingClothesL.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		trainingClothesL.setBackground(new Color(204, 204, 255));
 		trainingClothesL.setBounds(40, 475, 150, 50);
-		
+
 		JLabel trainingClothes = new JLabel(String.valueOf(member.getClothesSize()));
 		trainingClothes.setHorizontalAlignment(SwingConstants.LEFT);
 		trainingClothes.setForeground(Color.WHITE);
 		trainingClothes.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		trainingClothes.setBackground(new Color(204, 204, 255));
 		trainingClothes.setBounds(50, 510, 565, 50);
-		
+
 		JLabel lockerRoomL = new JLabel("락커룸");
 		lockerRoomL.setHorizontalAlignment(SwingConstants.LEFT);
 		lockerRoomL.setForeground(Color.WHITE);
@@ -162,13 +162,105 @@ public class UserInfo extends JPanel{
 		price.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		price.setBackground(new Color(204, 204, 255));
 		price.setBounds(415, 300, 200, 50);
-		
+
 		JLabel lockerRoomPw = new JLabel(member.getPw());//비밀번호 불러옴
 		lockerRoomPw.setHorizontalAlignment(SwingConstants.TRAILING);
 		lockerRoomPw.setForeground(Color.WHITE);
 		lockerRoomPw.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		lockerRoomPw.setBackground(new Color(204, 204, 255));
 		lockerRoomPw.setBounds(390, 620, 228, 50);
+
+		JLabel menu = new JLabel();
+		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setBounds(880, 20, 50, 40);		
+		add(menu);
+
+		JLabel sbar = new JLabel();
+		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
+		sbar.setBounds(0, 0, 1000, 800);		
+		sbar.setVisible(false);
+		
+
+		// sbar에 있는 메뉴 버튼 구성
+		JButton userInfoB = new JButton("회원정보");
+		userInfoB.setBorderPainted(false); // 버튼 배경 투명하게
+		userInfoB.setFocusPainted(false); // 버튼 배경 투명하게
+		userInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		userInfoB.setBounds(710, 200, 170, 40); 
+		userInfoB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		userInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		userInfoB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userInfoB.setForeground(new Color(105, 74, 151));
+				// userInfor() 실행
+			}
+		});
+		sbar.add(userInfoB);
+		
+		JButton healthInfoB = new JButton("건강정보");
+		healthInfoB.setBorderPainted(false); // 버튼 배경 투명하게
+		healthInfoB.setFocusPainted(false); // 버튼 배경 투명하게
+		healthInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		healthInfoB.setBounds(710, 320, 170, 40); // 버튼 배치
+		healthInfoB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		healthInfoB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		healthInfoB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				healthInfoB.setForeground(new Color(105, 74, 151));
+				// HealthInfor() 실행
+			}
+		});
+		sbar.add(healthInfoB);
+
+		JButton exerciseB = new JButton("운동일정");
+		exerciseB.setBorderPainted(false); // 버튼 배경 투명하게
+		exerciseB.setFocusPainted(false); // 버튼 배경 투명하게
+		exerciseB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		exerciseB.setBounds(710, 460, 170, 40); // 버튼 배치
+		exerciseB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		exerciseB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		exerciseB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exerciseB.setForeground(new Color(105, 74, 151));
+				// Exercise() 실행
+			}
+		});
+		sbar.add(exerciseB);
+
+		JButton noticeB = new JButton("공지사항");
+		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
+		noticeB.setFocusPainted(false); // 버튼 배경 투명하게
+		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		noticeB.setBounds(710, 580, 170, 40); // 버튼 배치
+		noticeB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		noticeB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				noticeB.setForeground(new Color(105, 74, 151));
+				// Notice() 실행
+			}
+		});
+		sbar.add(noticeB);
+		add(sbar);
+
+		// menu 눌렀을 때 sbar가 나오도록 함
+		menu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				active(menu, sbar);
+			}
+		});
+
+		// 화면을 눌렀을 때 sbar에 빠져 나오도록 함
+		JLabel background = new JLabel();
+		background.setBounds(0, 0, 600, 800);
+		add(background);
+		background.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nonactive(menu, sbar);
+			}
+		});
 		
 		p.add(photo);
 		p.add(userName);
@@ -187,12 +279,28 @@ public class UserInfo extends JPanel{
 		p.add(priceL);
 		p.add(price);
 		p.add(lockerRoomPw);
-		
+
 		add(title);
 		add(p);
-		
+
 		setLayout(null);
 		p.setLayout(null);
+	}
+
+	// 아무것도 안 눌렀을 때 - 평상시
+	public void nonactive(JLabel menu, JLabel sbar) {
+		menu.setVisible(true);
+		menu.setEnabled(true);
+		sbar.setVisible(false);
+		sbar.setEnabled(false);				
+	}
+
+	// 메뉴 눌렀을 때 
+	public void active(JLabel menu, JLabel sbar) {
+		menu.setVisible(false);
+		menu.setEnabled(false);
+		sbar.setVisible(true);
+		sbar.setEnabled(true);				
 	}
 }
 

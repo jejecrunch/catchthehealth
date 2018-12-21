@@ -44,7 +44,7 @@ public class MemberDAO {
 		temp.setId(id);
 		temp.setPw(pw);
 		
-		this.memList.remove(searchIndex(id, pw));
+		this.memList.remove(searchIdPwIndex(id, pw));
 		for(int i=0;i<this.memList.size();i++) {
 			// id를 가지고 ArrayList 컬렉션에 저장된 Member 객체를
 			// id 부분만 비교해서 일치하는 Member 객체를 찾는 과정 추가
@@ -54,24 +54,6 @@ public class MemberDAO {
 		}
 		
 		return true;
-	}
-
-	// ID와 PW 기준으로 회원번호 찾는 메소드
-	public int searchIndex(String id, String pw) {
-		// 비교 대상인 ID를 저장하는 임시 Member 객체
-		Member temp = new Member();
-		temp.setId(id);
-		temp.setPw(pw);
-
-		for(int i=0;i<this.memList.size();i++) {
-			// id를 가지고 ArrayList 컬렉션에 저장된 Member 객체를
-			// id 부분만 비교해서 일치하는 Member 객체를 찾는 과정 추가
-			if(this.compareToIdPw(temp, this.memList.get(i))) {
-				return i;
-			}
-		}
-
-		return -1; // 검색 실패하면 -1 반환
 	}
 
 	// ID와 PW 기준 자료 검색용 메소드
@@ -95,6 +77,7 @@ public class MemberDAO {
 		return mem;
 	}
 
+	// 두 멤버를 id와 pw를 비교하는 메소드
 	public boolean compareToIdPw(Member temp, Member member) {
 		if(temp.getId().equals(member.getId())&&temp.getPw().equals(member.getPw()))
 			return true;
@@ -102,6 +85,7 @@ public class MemberDAO {
 			return false;
 	}
 
+	// id pw 기준으로 회원번호 찾는 메소드
 	public int searchIdPwIndex(String id, String pw) {
 		for(int i=0;i<this.memList.size();i++) {
 			if(this.memList.get(i).getId().equals(id)&&this.memList.get(i).equals(pw))
