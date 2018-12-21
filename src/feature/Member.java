@@ -1,7 +1,6 @@
 package feature;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Member {
 	private String id;
@@ -15,11 +14,21 @@ public class Member {
 	private int weight;
 	private int fat;
 	private int muscle;
-	private Map<String, String> ptPlan = new HashMap<String, String>();
-	private Map<String, String> ptMeal = new HashMap<String, String>();
+	private int lockerroom;//락커룸 번호(admin이 지정)
+	
+
+	private Map<String, String> ptPlan=new LinkedHashMap<>();
+	private Date ptPlanUpDate = new Date();
+	private Map<String, String> ptMeal=new LinkedHashMap<>();
+	private Date ptMealUpDate = new Date();
 	
 	public Member() {
 		
+	}
+	
+	public Member(String id, String pw) {
+		this.id=id;
+		this.pw=pw;
 	}
 	
 	public Member(String id, String pw, String name, String phone, String email) {
@@ -98,13 +107,38 @@ public class Member {
 	public String getPtPlan(String day) {
 		return ptPlan.get(day);
 	}
+	public Set<String> planColumn() {
+		return ptPlan.keySet();
+	}
 	public void setPtPlan(String day, String time) {
 		ptPlan.put(day, time);
 	}
 	public String getPtMeal(String day) {
 		return ptMeal.get(day);
 	}
+	public Set<String> mealColumn(){
+		return ptMeal.keySet();
+	}
 	public void setPtMeal(String day, String meal) {
 		ptMeal.put(day, meal);
 	}
+	public int getLockerroom() {
+		return lockerroom;
+	}
+	public void setLockerroom(int lockerroom) {
+		this.lockerroom = lockerroom;
+	}
+	public Date getPtPlanUpDate() {
+		return ptPlanUpDate;
+	}
+	public void setPtPlanUpDate(Date date) {
+		this.ptPlanUpDate=date;
+	}
+	public Date getPtMealUpDate() {
+		return ptMealUpDate;
+	}
+	public void setPtMealUpDate(Date date) {
+		this.ptMealUpDate=date;
+	}
 }
+

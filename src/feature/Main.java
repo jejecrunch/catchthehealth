@@ -16,12 +16,20 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
+
 	private MenuUser menu=new MenuUser();
-	<<<<<<< HEAD
 	
-=======
+	private MenuUser menuus;
+	private MenuAdmin menuad=new MenuAdmin();
+	private UserInfo userinfo;
+	private ExerciseUser exus;
+
 	private MemberDAO memdao = MemberDAO.getInstance();
->>>>>>> branch 'dev' of https://github.com/jejecrunch/catchthehealth.git
+
+
+	
+	private String id;
+	private String pw;
 
 	// 프로그램 실행
 	public static void main(String[] args) {
@@ -33,37 +41,45 @@ public class Main extends JFrame implements ActionListener{
 		super("건강을 자바조");
 		getContentPane().setLayout(cards);
 		getContentPane().add("LOGIN", login);
-		getContentPane().add("MENU", menu);
+		getContentPane().add("MENU_ADMIN", menuad);
 		setSize(1000,800); // window 크기 결정
 		setLocation(100,100); // window 위치 결정
 		setVisible(true); // window를 보여준다.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기 누르면 메모리 해제
-		// admin 자료는 사전에 미리 입력한다.
+		setResizable(false);
+		// admin 자료와 user 자료는 사전에 미리 입력한다.
 		memdao.add(new Member("admin","test123","관리자","010-1234-5678","admin@test.com"));
+		memdao.add(new Member("12","12"));
 		// 이벤트 등록
 		login.loginB.addActionListener(this);
 		login.joinB.addActionListener(this);
 		login.findidpwB.addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==login.loginB) {
-			cards.show(getContentPane(), "MENU");
-		} else if(e.getSource()==login.joinB) {
-			// 가입하기 창 생성
-			final Frame joinF = new Frame("가입하기");
-			joinF.add(new Join());
-			joinF.setVisible(true);
-			joinF.setSize(800, 600);
-			joinF.setLocation(200, 200);
-			// 가입하기 창만 닫기
-			joinF.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent e) {
-					joinF.setVisible(false);
-					joinF.dispose();
+			id = login.getId();
+			pw = login.getPw();
+			if(memdao.searchIdPw(id, pw)!=null) {
+				if(memdao.searchAdmin(id, pw)) {
+					cards.show(getContentPane(), "MENU_ADMIN");
+					menuad.userManagementB.addActionListener(new adminEvent());
+					menuad.noticeB.addActionListener(new adminEvent());
+				} else {
+					menuus=new MenuUser(id, pw);
+					getContentPane().add("MENU_USER", menuus);
+					cards.show(getContentPane(), "MENU_USER");
+					menuus.userInfoB.addActionListener(new userEvent());
+					menuus.healthInfoB.addActionListener(new userEvent());
+					menuus.exerciseB.addActionListener(new userEvent());
+					menuus.noticeB.addActionListener(new userEvent());
 				}
-			});
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(), "입력하신 아이디나 비밀번호가 틀렸습니다.", "아아디/비밀번호 오류", JOptionPane.WARNING_MESSAGE);
+			}
+		} else if(e.getSource()==login.joinB) {
+			Join join=new Join();
 		} else if(e.getSource()==login.findidpwB) {
 			// 아이디 비번 찾기 창 생성
 			final Frame findidpwF = new Frame("아이디 비밀번호 찾기");
@@ -71,6 +87,7 @@ public class Main extends JFrame implements ActionListener{
 			findidpwF.setVisible(true);
 			findidpwF.setSize(320, 310);
 			findidpwF.setLocation(400, 400);
+			findidpwF.setResizable(false);
 			// 아이디 비번 찾기 창만 닫기
 			findidpwF.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
@@ -80,4 +97,40 @@ public class Main extends JFrame implements ActionListener{
 			});
 		}
 	}
+	
+	private class userEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+
+			if(e.getSource().equals(menuus.userInfoB)) {
+				userinfo = new UserInfo(id, pw);
+			} else if(e.getSource().equals(menuus.healthInfoB)) {
+				
+			} else if(e.getSource().equals(menuus.noticeB)) {
+				
+			} else if(e.getSource().equals(menuus.exerciseB)) {
+				exus=new ExerciseUser(id, pw);
+				getContentPane().add("EX_USER", exus);
+				cards.show(getContentPane(), "EX_USER");
+			}
+		}
+	}
+	
+	private class adminEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+			
+			if(e.getSource().equals(menuad.userManagementB)) {
+				
+			} else if(e.getSource().equals(menuad.noticeB)){
+				
+			}
+		}
+	}
 }
+
+
