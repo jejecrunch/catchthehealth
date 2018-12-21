@@ -16,6 +16,9 @@ public class Member {
 	private Map<Date, Integer> muscle=new LinkedHashMap<>();
 	private String clothesSize=null; // 운동복 사이즈 지정
 	private int lockerroom;//락커룸 번호(admin이 지정)
+	private PayHistoryDAO paydao;
+	
+
 	private Map<String, String> ptPlan=new LinkedHashMap<>();
 	private Date ptPlanUpDate = new Date();
 	private Map<String, String> ptMeal=new LinkedHashMap<>();
@@ -144,6 +147,14 @@ public class Member {
 	}
 	public void setPtMealUpDate(Date date) {
 		this.ptMealUpDate=date;
+	}
+
+	public PayHistoryDAO getPaydao() {
+		return paydao;
+	}
+
+	public void setPaydao(PayHistoryDAO paydao) {
+		this.paydao = paydao;
 	}
 }
 

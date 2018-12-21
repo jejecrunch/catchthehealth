@@ -16,6 +16,9 @@ public class Main extends JFrame implements ActionListener{
 
 	private CardLayout cards=new CardLayout(0,0);
 	private Login login=new Login();
+
+	
+
 	private MenuUser menuus;
 	private MenuAdmin menuad=new MenuAdmin();
 	private UserInfo userinfo;
