@@ -105,7 +105,7 @@ public class Main extends JFrame implements ActionListener{
 				getContentPane().add("USER_INFO", userinfo);
 				cards.show(getContentPane(), "USER_INFO");
 			} else if(e.getSource().equals(menuus.healthInfoB)) {
-				
+				HealthInfo healthInfo = new HealthInfo();
 			} else if(e.getSource().equals(menuus.noticeB)) {
 				NoticeView notice = new NoticeView();
 			} else if(e.getSource().equals(menuus.exerciseB)) {

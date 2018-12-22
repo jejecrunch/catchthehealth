@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HealthInfo extends JPanel {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		JFrame frame = new JFrame("건강정보");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1000, 800);
@@ -27,26 +27,30 @@ public class HealthInfo extends JPanel {
 		HealthInfo healthInforInsert = new HealthInfo(); 
 		frame.getContentPane().add(healthInforInsert);
 		frame.setResizable(false); // 창 크기 고정
-		frame.setVisible(true);
-		
-		
-		
-	
-	}
+		frame.setVisible(true);	
+	}*/
 
 	public HealthInfo() {
 		setLayout(null); // 레이아웃 설정
 		setBackground(new Color(204, 204, 255));
+		
+		JFrame frame = new JFrame("건강정보");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100,100,1000, 800);
+		frame.getContentPane().setBackground(new Color(204, 204, 255));
+		frame.getContentPane().setLayout(null); //frame 기본 레이아웃 해제
+		frame.setResizable(false); // 창 크기 고정
+		frame.setVisible(true);
 
 		JLabel menu = new JLabel("");
 		menu.setIcon(new ImageIcon("./images/menuButton.png"));
 		menu.setBounds(880, 20, 50, 40);		
-		add(menu);
+		frame.add(menu);
 		
 		JPanel graphwmf = new JPanel(); //그래프를 받을 패널
 		graphwmf.setBackground(new Color(236,236,255));
 		graphwmf.setBounds(166, 173, 651, 400);
-		add(graphwmf);
+		frame.add(graphwmf);
 
 		JButton insertB = new JButton("");
 		insertB.setIcon(new ImageIcon("./images/insertButton.png"));		
@@ -62,7 +66,7 @@ public class HealthInfo extends JPanel {
 			}
 
 		});
-		add(insertB);
+		frame.add(insertB);
 	}
 }
 
