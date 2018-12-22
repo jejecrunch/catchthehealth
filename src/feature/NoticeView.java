@@ -76,22 +76,30 @@ public class NoticeView extends JPanel {
 		user_no.setForeground(Color.WHITE);
 		p.add(user_no);
 
-		JLabel user_no_t = new JLabel("Title");
-		user_no_t.setBounds(114, 0, 402, 32);
+		JLabel user_no_t = new JLabel("제목");
+		user_no_t.setBounds(114, 0, 392, 32);
 		user_no_t.setHorizontalAlignment(SwingConstants.CENTER);
 		user_no_t.setForeground(Color.WHITE);
-		user_no_t.setFont(new Font("Calibri", Font.BOLD, 20));
+		user_no_t.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		user_no_t.setBackground(new Color(204, 204, 255));
 		p.add(user_no_t);
 
-		JLabel user_no_v = new JLabel("ViewCount");
-		user_no_v.setBounds(616, 0, 117, 32);
+		JLabel user_no_v = new JLabel("조회수");
+		user_no_v.setBounds(515, 0, 117, 32);
 		user_no_v.setHorizontalAlignment(SwingConstants.CENTER);
 		user_no_v.setForeground(Color.WHITE);
-		user_no_v.setFont(new Font("Calibri", Font.BOLD, 20));
+		user_no_v.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		user_no_v.setBackground(new Color(204, 204, 255));
 		p.add(user_no_v);
 
 		frame.getContentPane().add(p);
+		
+		JLabel user_no_d = new JLabel("작성일");
+		user_no_d.setHorizontalAlignment(SwingConstants.CENTER);
+		user_no_d.setForeground(Color.WHITE);
+		user_no_d.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		user_no_d.setBackground(new Color(204, 204, 255));
+		user_no_d.setBounds(629, 0, 117, 32);
+		p.add(user_no_d);
 	}
 }

@@ -30,16 +30,7 @@ public class HealthInfo extends JPanel {
 		frame.setVisible(true);
 		
 		
-		JPanel weight = new JPanel();
-		weight.setBackground(new Color(236,236,255));
-		weight.setBounds(166, 143, 651, 247);
-		frame.getContentPane().add(weight);
 		
-		
-		JPanel muscle_fat = new JPanel();
-		muscle_fat.setBounds(166, 448, 651, 253);
-		muscle_fat.setBackground(new Color(236,236,255));
-		frame.getContentPane().add(muscle_fat);
 	
 	}
 
@@ -51,6 +42,11 @@ public class HealthInfo extends JPanel {
 		menu.setIcon(new ImageIcon("./images/menuButton.png"));
 		menu.setBounds(880, 20, 50, 40);		
 		add(menu);
+		
+		JPanel graphwmf = new JPanel(); //그래프를 받을 패널
+		graphwmf.setBackground(new Color(236,236,255));
+		graphwmf.setBounds(166, 173, 651, 400);
+		add(graphwmf);
 
 		JButton insertB = new JButton("");
 		insertB.setIcon(new ImageIcon("./images/insertButton.png"));		
