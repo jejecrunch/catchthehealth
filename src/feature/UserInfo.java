@@ -54,10 +54,14 @@ public class UserInfo extends JPanel{
 		availableTime.setBackground(new Color(204, 204, 255));
 		availableTime.setBounds(200, 80, 150, 50);
 
-		JLabel validTime = new JLabel("기간~//payhistory에서 가져올 예정");
+		JLabel validTime = new JLabel();
 		validTime.setVerticalAlignment(SwingConstants.TOP);
 		validTime.setHorizontalAlignment(SwingConstants.CENTER);
-		validTime.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		if(!member.getPaydao().getInstance().list().isEmpty()) {
+
+			validTime.setText(PayHistoryDAO.getInstance().list().get(0).getExerciseSeason());
+			}
+		validTime.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 		validTime.setBounds(250, 135, 400, 50);
 		validTime.setForeground(new Color(255, 255, 255));
 		validTime.setBackground(new Color(204, 204, 255));
@@ -103,8 +107,13 @@ public class UserInfo extends JPanel{
 		payDateL.setBackground(new Color(204, 204, 255));
 		payDateL.setBounds(40, 270, 150, 50);
 
-		JLabel payDate = new JLabel("최근 결제 날짜");
+			
+		JLabel payDate = new JLabel();
 		payDate.setForeground(Color.WHITE);
+		if(!member.getPaydao().getInstance().list().isEmpty()) {
+
+			payDateL.setText(PayHistoryDAO.getInstance().list().get(0).getNtime());
+			}
 		payDate.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		payDate.setBackground(new Color(204, 204, 255));
 		payDate.setBounds(50, 300, 150, 50);
@@ -156,9 +165,13 @@ public class UserInfo extends JPanel{
 		priceL.setBackground(new Color(204, 204, 255));
 		priceL.setBounds(300, 270, 150, 50);
 
-		JLabel price = new JLabel("가격"+"₩");
+		JLabel price = new JLabel();
 		price.setHorizontalAlignment(SwingConstants.TRAILING);
 		price.setForeground(Color.WHITE);
+		if(!member.getPaydao().getInstance().list().isEmpty()) {
+
+			price.setText(PayHistoryDAO.getInstance().list().get(0).getPayMoney());
+			}
 		price.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		price.setBackground(new Color(204, 204, 255));
 		price.setBounds(415, 300, 200, 50);

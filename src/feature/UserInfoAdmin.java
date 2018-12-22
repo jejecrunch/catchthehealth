@@ -129,8 +129,8 @@ public class UserInfoAdmin extends JPanel {
 				// 버튼 위에 올렸을 때
 				@Override
 				public void mouseEntered(MouseEvent e) { 
-					setForeground(new Color(204, 204, 255));
-					setBackground(new Color(255, 255, 255));
+					setForeground(Color.YELLOW);
+					setBackground(new Color(204, 204, 204));
 				}
 				// 버튼 클릭하지 않았을 때
 				@Override

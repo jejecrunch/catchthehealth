@@ -15,21 +15,24 @@ public class Member {
 	private Map<Date, Integer> fat=new LinkedHashMap<>();
 	private Map<Date, Integer> muscle=new LinkedHashMap<>();
 	private String clothesSize=null; // 운동복 사이즈 지정
-	private int lockerroom;//락커룸 번호(admin이 지정)
+	private String lockerroom;//락커룸 번호(admin이 지정)
+	private PayHistoryDAO paydao;
+
+
 	private Map<String, String> ptPlan=new LinkedHashMap<>();
 	private Date ptPlanUpDate = new Date();
 	private Map<String, String> ptMeal=new LinkedHashMap<>();
 	private Date ptMealUpDate = new Date();
-	
+
 	public Member() {
-		
+
 	}
-	
+
 	public Member(String id, String pw) {
 		this.id=id;
 		this.pw=pw;
 	}
-	
+
 	public Member(String id, String pw, String name, String phone, String email) {
 		this.id=id;
 		this.pw=pw;
@@ -121,10 +124,10 @@ public class Member {
 	public void setPtMeal(String day, String meal) {
 		ptMeal.put(day, meal);
 	}
-	public int getLockerroom() {
+	public String getLockerroom() {
 		return lockerroom;
 	}
-	public void setLockerroom(int lockerroom) {
+	public void setLockerroom(String lockerroom) {
 		this.lockerroom = lockerroom;
 	}
 	public String getClothesSize() {
@@ -144,6 +147,18 @@ public class Member {
 	}
 	public void setPtMealUpDate(Date date) {
 		this.ptMealUpDate=date;
+	}
+
+	public PayHistoryDAO getPaydao() {
+		return paydao;
+	}
+
+	public void setPaydao(PayHistoryDAO paydao) {
+		if(paydao==null) 
+			this.paydao = paydao;
+		}
+	public void setPaydao(PayHistory p) {
+		this.paydao.add(p);
 	}
 }
 
