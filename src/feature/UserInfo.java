@@ -89,7 +89,7 @@ public class UserInfo extends JPanel{
 			}
 		});
 		payhistoryB.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		payhistoryB.setBounds(30, 200, 590, 50);
+		payhistoryB.setBounds(30, 200, 500, 50); // 초반 값: 30 200 590 50, 슬라이더 메뉴랑 겹치는 거 수정
 		payhistoryB.setForeground(new Color(255, 255, 255));
 		payhistoryB.setBackground(new Color(204, 204, 255));
 		payhistoryB.setBorderPainted(false);
