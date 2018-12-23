@@ -16,11 +16,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 public class NoticeView extends JPanel {
+	
+	JLabel menu, sbar, background;
+	JButton userManagementB, noticeB;
 
 	public NoticeView() {
 		setBackground(new Color(204, 204, 255));
 
-		JLabel menu = new JLabel("");
+		menu = new JLabel("");
 		menu.setIcon(new ImageIcon("./images/menuButton.png"));
 		menu.setBounds(880, 20, 50, 40);		
 
@@ -76,7 +79,7 @@ public class NoticeView extends JPanel {
 		user_no_v.setForeground(Color.WHITE);
 		user_no_v.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		user_no_v.setBackground(new Color(204, 204, 255));
-		
+
 		JLabel user_no_d = new JLabel("작성일");
 		user_no_d.setHorizontalAlignment(SwingConstants.CENTER);
 		user_no_d.setForeground(Color.WHITE);
@@ -84,17 +87,50 @@ public class NoticeView extends JPanel {
 		user_no_d.setBackground(new Color(204, 204, 255));
 		user_no_d.setBounds(629, 0, 117, 32);
 		
+		sbar = new JLabel();
+		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
+		sbar.setBounds(0, 0, 1000, 800);		
+		sbar.setVisible(false);
+		
+		background = new JLabel();
+		background.setBounds(0, 0, 600, 800);
+
+		// sbar에 있는 메뉴 버튼 구성
+		userManagementB = new JButton("회원관리");
+		userManagementB.setBorderPainted(false); // 버튼 배경 투명하게
+		userManagementB.setFocusPainted(false); // 버튼 배경 투명하게
+		userManagementB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		userManagementB.setBounds(710, 320, 170, 40); // 버튼 배치
+		userManagementB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		userManagementB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		sbar.add(userManagementB);
+
+		noticeB = new JButton("공지사항");
+		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
+		noticeB.setFocusPainted(false); // 버튼 배경 투명하게
+		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		noticeB.setBounds(710, 460, 170, 40); // 버튼 배치
+		noticeB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		sbar.add(noticeB);	
+
 		p.add(user_no);
 		p.add(user_no_t);
 		p.add(user_no_v);
 		p.add(user_no_d);
-		
+
+		// slider panel에 요소 추가
+		sbar.add(userManagementB);
+		sbar.add(noticeB);
+
 		add(insertB);
 		add(menu);
+		add(sbar);
 		add(p);
-		
+		add(background);
+
 		setLayout(null);
 		p.setLayout(null);
-		
+
 	}
 }

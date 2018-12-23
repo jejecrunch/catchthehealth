@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -22,6 +23,9 @@ import javax.swing.SwingConstants;
 
 public class UserInfoAdmin extends JPanel {
 
+	JLabel menu, sbar, background;
+	JButton userManagementB, noticeB;
+	
 	private int memberNo=0;
 	private String[] column= {"No.","Full Name","Age Range","PT","Show View"};
 
@@ -36,6 +40,10 @@ public class UserInfoAdmin extends JPanel {
 		setBackground(new Color(204, 204, 255));
 		setBounds(100,100,1000,800);
 		setLayout(null);
+		
+		menu = new JLabel("");
+		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setBounds(880, 20, 50, 40);
 
 		JLabel title=new JLabel("회원정보");
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
@@ -151,9 +159,39 @@ public class UserInfoAdmin extends JPanel {
 			scP.add(button[i]);
 
 		}
+		
+		sbar = new JLabel();
+		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
+		sbar.setBounds(0, 0, 1000, 800);		
+		sbar.setVisible(false);
+		
+		background = new JLabel();
+		background.setBounds(0, 0, 600, 800);
+
+		// sbar에 있는 메뉴 버튼 구성
+		userManagementB = new JButton("회원관리");
+		userManagementB.setBorderPainted(false); // 버튼 배경 투명하게
+		userManagementB.setFocusPainted(false); // 버튼 배경 투명하게
+		userManagementB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		userManagementB.setBounds(710, 320, 170, 40); // 버튼 배치
+		userManagementB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		userManagementB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		sbar.add(userManagementB);
+
+		noticeB = new JButton("공지사항");
+		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
+		noticeB.setFocusPainted(false); // 버튼 배경 투명하게
+		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
+		noticeB.setBounds(710, 460, 170, 40); // 버튼 배치
+		noticeB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
+		noticeB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		sbar.add(noticeB);	
 
 		add(title);
+		add(menu);
+		add(sbar);
 		add(scP);
+		add(background);
 
 		revalidate();
 		repaint();

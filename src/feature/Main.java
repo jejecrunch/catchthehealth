@@ -370,10 +370,118 @@ public class Main extends JFrame implements ActionListener{
 				userinfo_ad = new UserInfoAdmin();
 				getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
 				cards.show(getContentPane(), "USER_INFO_ADMIN");
+				userinfo_ad.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(userinfo_ad.menu, userinfo_ad.sbar);
+					}
+				});
+				userinfo_ad.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(notice_ad.menu, notice_ad.sbar);
+					}
+				});
+
+				userinfo_ad.userManagementB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo_ad = new UserInfoAdmin();
+						getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
+						cards.show(getContentPane(), "USER_INFO_ADMIN");
+						userinfo_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						userinfo_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						
+					}
+				});
+				userinfo_ad.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						notice_ad = new NoticeView();
+						getContentPane().add("NOTICE_ADMIN", notice_ad);
+						cards.show(getContentPane(), "NOTICE_ADMIN");
+						notice_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+						notice_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+					}
+				});
 			} else if(e.getSource().equals(menuad.noticeB)){
 				notice_ad = new NoticeView();
 				getContentPane().add("NOTICE_ADMIN", notice_ad);
 				cards.show(getContentPane(), "NOTICE_ADMIN");
+				notice_ad.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(notice_ad.menu, notice_ad.sbar);
+					}
+				});
+				notice_ad.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(notice_ad.menu, notice_ad.sbar);
+					}
+				});
+
+				notice_ad.userManagementB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo_ad = new UserInfoAdmin();
+						getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
+						cards.show(getContentPane(), "USER_INFO_ADMIN");
+						userinfo_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						userinfo_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						
+					}
+				});
+				notice_ad.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						notice_ad = new NoticeView();
+						getContentPane().add("NOTICE_ADMIN", notice_ad);
+						cards.show(getContentPane(), "NOTICE_ADMIN");
+						notice_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+						notice_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+					}
+				});
 			}
 		}
 	}
