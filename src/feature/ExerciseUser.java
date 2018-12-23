@@ -11,6 +11,9 @@ public class ExerciseUser extends JPanel {
 	private Member person;
 	private JFrame newWindow;
 
+	JLabel menu, sbar, background;
+	JButton userInfoB, healthInfoB, exerciseB, noticeB;
+
 	// 어플리케이션 생성
 	public ExerciseUser(String id, String pw) {
 		person=memdao.searchIdPw(id, pw);
@@ -26,6 +29,11 @@ public class ExerciseUser extends JPanel {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setForeground(new Color(255, 255, 255));
 		title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+
+		// 슬라이더 메뉴
+		menu = new JLabel();
+		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setBounds(880, 20, 50, 40);
 
 		// 운동 일정 테이블
 		// 운동 일정 테이블의 데이터값과 데이터가 어떤 것인지 알려주는 column 값으로 모델 생성
@@ -290,20 +298,16 @@ public class ExerciseUser extends JPanel {
 			}
 		});
 		
-		// 슬라이더 메뉴
-		JLabel menu = new JLabel();
-		menu.setIcon(new ImageIcon("./images/menuButton.png"));
-		menu.setBounds(880, 20, 50, 40);		
-		add(menu);
-
-		JLabel sbar = new JLabel();
+		sbar = new JLabel();
 		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
 		sbar.setBounds(0, 0, 1000, 800);		
 		sbar.setVisible(false);
 		
-
+		background = new JLabel();
+		background.setBounds(0, 0, 600, 800);
+		
 		// sbar에 있는 메뉴 버튼 구성
-		JButton userInfoB = new JButton("회원정보");
+		userInfoB = new JButton("회원정보");
 		userInfoB.setBorderPainted(false); // 버튼 배경 투명하게
 		userInfoB.setFocusPainted(false); // 버튼 배경 투명하게
 		userInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
@@ -316,9 +320,8 @@ public class ExerciseUser extends JPanel {
 				// userInfor() 실행
 			}
 		});
-		sbar.add(userInfoB);
 		
-		JButton healthInfoB = new JButton("건강정보");
+		healthInfoB = new JButton("건강정보");
 		healthInfoB.setBorderPainted(false); // 버튼 배경 투명하게
 		healthInfoB.setFocusPainted(false); // 버튼 배경 투명하게
 		healthInfoB.setContentAreaFilled(false); // 버튼 배경 투명하게
@@ -331,24 +334,41 @@ public class ExerciseUser extends JPanel {
 				// HealthInfor() 실행
 			}
 		});
-		sbar.add(healthInfoB);
 
-		JButton exerciseB = new JButton("운동일정");
+		exerciseB = new JButton("운동일정");
 		exerciseB.setBorderPainted(false); // 버튼 배경 투명하게
 		exerciseB.setFocusPainted(false); // 버튼 배경 투명하게
 		exerciseB.setContentAreaFilled(false); // 버튼 배경 투명하게
 		exerciseB.setBounds(710, 460, 170, 40); // 버튼 배치
 		exerciseB.setForeground(new Color(204, 204, 255)); // 버튼 글씨 색상
 		exerciseB.setFont(new Font("맑은 고딕", Font.PLAIN, 25)); // 버튼 폰트, 크기 설정
+		exerciseB.addMouseListener(new MouseAdapter() {
+			// 버튼 위에 올렸을 때
+			@Override
+			public void mouseEntered(MouseEvent e) { 
+				exerciseB.setForeground(new Color(204, 204, 255));
+				exerciseB.setBackground(new Color(255, 255, 255));
+			}
+			// 버튼 클릭하지 않았을 때
+			@Override
+			public void mouseExited(MouseEvent e) { 
+				exerciseB.setForeground(new Color(204, 204, 255));
+				exerciseB.setBackground(new Color(255, 255, 255));
+			}
+			// 버튼 클릭했을 때
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// 나중에 추가
+			}
+		});
 		exerciseB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exerciseB.setForeground(new Color(105, 74, 151));
 				// Exercise() 실행
 			}
 		});
-		sbar.add(exerciseB);
 
-		JButton noticeB = new JButton("공지사항");
+		noticeB = new JButton("공지사항");
 		noticeB.setBorderPainted(false); // 버튼 배경 투명하게
 		noticeB.setFocusPainted(false); // 버튼 배경 투명하게
 		noticeB.setContentAreaFilled(false); // 버튼 배경 투명하게
@@ -359,27 +379,6 @@ public class ExerciseUser extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				noticeB.setForeground(new Color(105, 74, 151));
 				// Notice() 실행
-			}
-		});
-		sbar.add(noticeB);
-		add(sbar);
-
-		// menu 눌렀을 때 sbar가 나오도록 함
-		menu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				active(menu, sbar);
-			}
-		});
-
-		// 화면을 눌렀을 때 sbar에 빠져 나오도록 함
-		JLabel background = new JLabel();
-		background.setBounds(0, 0, 600, 800);
-		add(background);
-		background.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				nonactive(menu, sbar);
 			}
 		});
 
@@ -405,28 +404,22 @@ public class ExerciseUser extends JPanel {
 		p.add(dinner);
 		p.repaint();
 
+		// slider panel에 요소 추가
+		sbar.add(userInfoB);
+		sbar.add(healthInfoB);
+		sbar.add(exerciseB);
+		sbar.add(noticeB);
+
 		// 레이아웃 없애기
 		setLayout(null);
 		p.setLayout(null);
 
-		// 컴포넌트에 title과 패널 추간
+		// 컴포넌트에 title과 패널 추가
 		add(title);
+		add(menu);
+		add(sbar);
 		add(p);
+		add(background);
+		
 	}
-	
-	// 아무것도 안 눌렀을 때 - 평상시
-		public void nonactive(JLabel menu, JLabel sbar) {
-			menu.setVisible(true);
-			menu.setEnabled(true);
-			sbar.setVisible(false);
-			sbar.setEnabled(false);				
-		}
-
-		// 메뉴 눌렀을 때 
-		public void active(JLabel menu, JLabel sbar) {
-			menu.setVisible(false);
-			menu.setEnabled(false);
-			sbar.setVisible(true);
-			sbar.setEnabled(true);				
-		}
 }

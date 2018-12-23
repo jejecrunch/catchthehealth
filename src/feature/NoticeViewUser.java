@@ -1,43 +1,22 @@
 package feature;
 
-import java.awt.Color;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Graphics;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
-public class NoticeView extends JPanel {
-
-	public NoticeView() {
+public class NoticeViewUser extends JPanel {
+	JLabel menu, sbar, background;
+	JButton userInfoB, healthInfoB, exerciseB, noticeB;
+	
+	public NoticeViewUser() {
 		setBackground(new Color(204, 204, 255));
 
-		JLabel menu = new JLabel("");
+		menu = new JLabel("");
 		menu.setIcon(new ImageIcon("./images/menuButton.png"));
 		menu.setBounds(880, 20, 50, 40);		
 
-		JButton insertB = new JButton("");
-		insertB.setIcon(new ImageIcon("./images/insertButton.png"));		
-		insertB.setBorderPainted(false); // 버튼 배경 투명하게
-		insertB.setFocusPainted(false); // 버튼 배경 투명하게
-		insertB.setContentAreaFilled(false); // 버튼 배경 투명하게
-		insertB.setBounds(800, 20, 50, 40);		
-		insertB.addActionListener(new ActionListener() {
-			// 버튼이 눌러지면 발생하는 행동을 정의
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new NoticeWrite(); // 클래스 insert를 새로 만들어낸다
-			}
-
-		});
 
 		JPanel p = new JPanel() {
 			@Override
@@ -89,7 +68,6 @@ public class NoticeView extends JPanel {
 		p.add(user_no_v);
 		p.add(user_no_d);
 		
-		add(insertB);
 		add(menu);
 		add(p);
 		

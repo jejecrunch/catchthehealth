@@ -24,21 +24,21 @@ public class SliderMenuUser extends JPanel {
 		frame.setResizable(false); // 창 크기 고정
 		frame.setVisible(true);
 	}*/
+	
+	JLabel sbar;
 
 	public SliderMenuUser() {
-		setLayout(null); // 레이아웃 설정
 
 		JLabel menu = new JLabel();
 		menu.setIcon(new ImageIcon("./images/menuButton.png"));
 		menu.setBounds(880, 20, 50, 40);		
 		add(menu);
 
-		JLabel sbar = new JLabel();
+		sbar = new JLabel();
 		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
 		sbar.setBounds(0, 0, 1000, 800);		
 		sbar.setVisible(false);
 		
-
 		// sbar에 있는 메뉴 버튼 구성
 		JButton userInfoB = new JButton("회원정보");
 		userInfoB.setBorderPainted(false); // 버튼 배경 투명하게

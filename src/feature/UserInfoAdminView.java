@@ -142,9 +142,6 @@ public class UserInfoAdminView extends JPanel{
 		payhistoryB.setBorderPainted(false);
 		payhistoryB.setFocusPainted(false);
 		frame.getContentPane().add(payhistoryB);
-		
-		
-
 
 		
 		JLabel availableTime = new JLabel();
@@ -180,8 +177,6 @@ public class UserInfoAdminView extends JPanel{
 		addressM.setBackground(Color.WHITE);
 		addressM.setBounds(391, 303, 219, 49);
 		frame.getContentPane().add(addressM);
-
-
 
 		JLabel lockerRoomL = new JLabel("락커룸");
 		lockerRoomL.setForeground(new Color(204,204,255));
