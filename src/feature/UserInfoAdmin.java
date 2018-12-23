@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,6 +26,8 @@ public class UserInfoAdmin extends JPanel {
 
 	JLabel menu, sbar, background;
 	JButton userManagementB, noticeB;
+	private URL imageURL = Login.class.getClassLoader().getResource("menuButton.png");
+	private ImageIcon img = new ImageIcon(imageURL);
 	
 	private int memberNo=0;
 	private String[] column= {"No.","Full Name","Age Range","PT","Show View"};
@@ -42,7 +45,7 @@ public class UserInfoAdmin extends JPanel {
 		setLayout(null);
 		
 		menu = new JLabel("");
-		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setIcon(new ImageIcon(img.getImage()));
 		menu.setBounds(880, 20, 50, 40);
 
 		JLabel title=new JLabel("회원정보");

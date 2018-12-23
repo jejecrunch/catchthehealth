@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 public class HealthInfo extends JPanel {
 	/*public static void main(String[] args) {
@@ -31,6 +32,13 @@ public class HealthInfo extends JPanel {
 		frame.setResizable(false); // 창 크기 고정
 		frame.setVisible(true);	
 	}*/
+	
+	private URL imageURL = Login.class.getClassLoader().getResource("menuButton.png");
+	private ImageIcon img = new ImageIcon(imageURL);
+	private URL imageURL2 = Login.class.getClassLoader().getResource("insertButton.png");
+	private ImageIcon img2 = new ImageIcon(imageURL2);
+	private URL imageURL3 = Login.class.getClassLoader().getResource("userSbar.png");
+	private ImageIcon img3 = new ImageIcon(imageURL3);
 
 	public HealthInfo() {
 		setLayout(null); // 레이아웃 설정
@@ -45,7 +53,7 @@ public class HealthInfo extends JPanel {
 		frame.setVisible(true);
 
 		JButton insertB = new JButton("");
-		insertB.setIcon(new ImageIcon("./images/insertButton.png"));		
+		insertB.setIcon(new ImageIcon(img2.getImage()));		
 		insertB.setBorderPainted(false); // 버튼 배경 투명하게
 		insertB.setFocusPainted(false); // 버튼 배경 투명하게
 		insertB.setContentAreaFilled(false); // 버튼 배경 투명하게
@@ -61,12 +69,13 @@ public class HealthInfo extends JPanel {
 		frame.add(insertB);
 
 		JLabel menu = new JLabel("");
-		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		
+		menu.setIcon(new ImageIcon(img.getImage()));
 		menu.setBounds(880, 20, 50, 40);		
 		frame.add(menu);
 
 		JLabel sbar = new JLabel();
-		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
+		sbar.setIcon(new ImageIcon(img3.getImage()));
 		sbar.setBounds(0, 0, 1000, 800);		
 		sbar.setVisible(false);
 

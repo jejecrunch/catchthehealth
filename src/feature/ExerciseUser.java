@@ -2,6 +2,7 @@ package feature;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.*;
 
 import javax.swing.*;
@@ -13,6 +14,9 @@ public class ExerciseUser extends JPanel {
 
 	JLabel menu, sbar, background;
 	JButton userInfoB, healthInfoB, exerciseB, noticeB;
+	
+	private URL imageURL = Login.class.getClassLoader().getResource("menuButton.png");
+	private ImageIcon img = new ImageIcon(imageURL);
 
 	// 어플리케이션 생성
 	public ExerciseUser(String id, String pw) {
@@ -32,7 +36,7 @@ public class ExerciseUser extends JPanel {
 
 		// 슬라이더 메뉴
 		menu = new JLabel();
-		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setIcon(new ImageIcon(img.getImage()));
 		menu.setBounds(880, 20, 50, 40);
 
 		// 운동 일정 테이블

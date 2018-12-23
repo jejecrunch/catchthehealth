@@ -3,6 +3,7 @@ package feature;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
@@ -13,7 +14,9 @@ public class Login extends JPanel{
 	private JPasswordField password;
 	JButton loginB, joinB, findidpwB;
 	private MemberDAO memdao;
-	private ImageIcon logo=new ImageIcon("./images/logo.png");
+	private URL imageURL = Login.class.getClassLoader().getResource("logo.png");
+	private ImageIcon img = new ImageIcon(imageURL);
+	private ImageIcon logo=new ImageIcon(img.getImage());
 	private JLabel logoL=new JLabel();
 	private static final String REGEX=".*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+.*"; // 한글만 구분
 

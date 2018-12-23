@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
@@ -19,16 +20,21 @@ public class NoticeView extends JPanel {
 	
 	JLabel menu, sbar, background;
 	JButton userManagementB, noticeB;
+	
+	private URL imageURL = Login.class.getClassLoader().getResource("menuButton.png");
+	private ImageIcon img = new ImageIcon(imageURL);
+	private URL imageURL2 = Login.class.getClassLoader().getResource("insertButton.png");
+	private ImageIcon img2 = new ImageIcon(imageURL2);
 
 	public NoticeView() {
 		setBackground(new Color(204, 204, 255));
 
 		menu = new JLabel("");
-		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setIcon(new ImageIcon(img.getImage()));
 		menu.setBounds(880, 20, 50, 40);		
 
 		JButton insertB = new JButton("");
-		insertB.setIcon(new ImageIcon("./images/insertButton.png"));		
+		insertB.setIcon(new ImageIcon(img2.getImage()));		
 		insertB.setBorderPainted(false); // 버튼 배경 투명하게
 		insertB.setFocusPainted(false); // 버튼 배경 투명하게
 		insertB.setContentAreaFilled(false); // 버튼 배경 투명하게

@@ -3,10 +3,15 @@ package feature;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.net.URL;
 
 public class UserInfo extends JPanel{
 	JLabel menu, sbar, background;
 	JButton userInfoB, healthInfoB, exerciseB, noticeB;
+	private URL imageURL = Login.class.getClassLoader().getResource("menuButton.png");
+	private ImageIcon img = new ImageIcon(imageURL);
+	private URL imageURL2 = Login.class.getClassLoader().getResource("userSbar.png");
+	private ImageIcon img2 = new ImageIcon(imageURL2);
 
 	public UserInfo(Member member) {
 		setForeground(new Color(255, 255, 255));
@@ -15,11 +20,11 @@ public class UserInfo extends JPanel{
 
 		// 슬라이더 메뉴
 		menu = new JLabel();
-		menu.setIcon(new ImageIcon("./images/menuButton.png"));
+		menu.setIcon(new ImageIcon(img.getImage()));
 		menu.setBounds(880, 20, 50, 40);		
 
 		sbar = new JLabel();
-		sbar.setIcon(new ImageIcon("./images/userSbar.png"));
+		sbar.setIcon(new ImageIcon(img.getImage()));
 		sbar.setBounds(0, 0, 1000, 800);		
 		sbar.setVisible(false);
 

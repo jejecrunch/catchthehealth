@@ -2,15 +2,22 @@ package feature;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.table.*;
 
 public class ExerciseAdmin extends JPanel {
-	private ImageIcon addP = new ImageIcon("./images/new_event.png");
-	private ImageIcon addM = new ImageIcon("./images/new_meal.png");
-	private ImageIcon menu = new ImageIcon("./images/menuButton.png");
+	private URL imageURL = Login.class.getClassLoader().getResource("new_event.png");
+	private ImageIcon img = new ImageIcon(imageURL);
+	private URL imageURL2 = Login.class.getClassLoader().getResource("new_meal.png");
+	private ImageIcon img2 = new ImageIcon(imageURL2);
+	private URL imageURL3 = Login.class.getClassLoader().getResource("menuButton.png");
+	private ImageIcon img3 = new ImageIcon(imageURL3);
+	private ImageIcon addP = new ImageIcon(img.getImage());
+	private ImageIcon addM = new ImageIcon(img2.getImage());
+	private ImageIcon menu = new ImageIcon(img3.getImage());
 
 	private AddPlan addp=new AddPlan();
 	private AddMeal addm=new AddMeal();
