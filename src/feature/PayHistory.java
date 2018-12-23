@@ -1,22 +1,68 @@
 package feature;
 
-import javax.swing.JPanel;
+import java.util.Calendar;
 
-public class PayHistory extends JPanel {
+public class PayHistory {
+	Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
+	private String ntime = new String();
+	private boolean payingForExercise;
+	private String payMoney;
+	private MemberDAO m=MemberDAO.getInstance();
+	private Member user;
+	private int year=c.get ( Calendar.YEAR );
+	private int month=c.get ( Calendar.MONTH );
+	private int day=c.get ( Calendar.DATE );
+	private String exerciseSeason;
+	private String subject;
+	public String getNtime() {
+		return ntime;
+	}
 
-	/**
-	 * Create the panel.
-	 */
-	public PayHistory() {
+
+	public void setNtime() {
+		ntime = String.valueOf(year) + ". ";
+		ntime += String.valueOf(month) + ". ";
+		ntime += String.valueOf(day);
+	}
+
+
+
+	public String getPayMoney() {
+		return payMoney;
+	}
+
+
+	public void setPayMoney(String payMoney) {
+		this.payMoney = payMoney;
+	}
+
+
+	public String getExerciseSeason() {
+		return exerciseSeason;
+	}
+
+
+	public void setExerciseSeason(String exerciseSeason) {
+		
+		this.exerciseSeason = exerciseSeason;
 
 	}
 
-}
 
-class PayHistoryUser {
-	
-}
+	public String getSubject() {
+		return subject;
+	}
 
-class PayHistoryAdmin {
-	
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+
+	public PayHistory(){
+
+
+
+	}
+
 }

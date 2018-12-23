@@ -1,115 +1,506 @@
 package feature;
 
-import java.awt.EventQueue;
+/*
+ * 파일명:Main.java
+ * 파일설명:로그인 화면
+ * --> 유저 확인 후 회원이면 user info로 전환, 관리자면 user list로 전환
+ * 작성자:성공회대 201632035 한지혜
+ */
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JSlider;
-import javax.swing.JToggleButton;
+import java.awt.*; // Layout
+import javax.swing.*; // Window와 관련된 모든 클래스
 
-public class Main {
+import java.awt.event.*; // Listener(위임자)
 
-	private JFrame frame;
-	private JTextField userid;
-	private JPasswordField password;
-	private JButton btnJoin;
-	private JButton btnFindIdOr;
-	private JLabel lblLogo;
+public class Main extends JFrame implements ActionListener{
 
-	/**
-	 * Launch the application.
-	 */
+	private CardLayout cards=new CardLayout(0,0);
+	private Login login=new Login();
+
+	private MenuUser menuus;
+	private MenuAdmin menuad=new MenuAdmin();
+	private UserInfo userinfo;
+	private UserInfoAdmin userinfo_ad;
+	private ExerciseUser exus;
+	private Member cur_user;
+	private NoticeView notice_ad;
+	private NoticeViewUser notice_us;
+	private MemberDAO memdao = MemberDAO.getInstance();
+	private String id;
+	private String pw;
+
+	// 프로그램 실행
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		Main main=new Main();
 	}
 
-	/**
-	 * Create the application.
-	 */
+	// 어플리케이션 생성
 	public Main() {
-		initialize();
+		super("건강을 자바조");
+		getContentPane().setLayout(cards);
+		getContentPane().add("LOGIN", login);
+		getContentPane().add("MENU_ADMIN", menuad);
+		setSize(1000,800); // window 크기 결정
+		setLocation(100,100); // window 위치 결정
+		setVisible(true); // window를 보여준다.
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 닫기 누르면 메모리 해제
+		setResizable(false);
+		// admin 자료와 user 자료는 사전에 미리 입력한다.
+		memdao.add(new Member("admin","test123","관리자","010-1234-5678","admin@test.com"));
+		memdao.add(new Member("12","12"));
+		// 이벤트 등록
+		login.loginB.addActionListener(this);
+		login.joinB.addActionListener(this);
+		login.findidpwB.addActionListener(this);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(204, 204, 255));
-		frame.getContentPane().setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		userid = new JTextField();
-		userid.setBounds(292, 273, 221, 32);
-		frame.getContentPane().add(userid);
-		userid.setColumns(10);
-		
-		password = new JPasswordField();
-		password.setBounds(292, 317, 221, 32);
-		frame.getContentPane().add(password);
-		
-		JButton btnLogin = new JButton("LOGIN");
-		btnLogin.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String uId=userid.getText();
-				String pw =password.getText();
-				
-				if(uId.equals("id") && pw.equals("pass")) {
-					JOptionPane.showMessageDialog(frame, "Login success!");
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==login.loginB) {
+			id = login.getId();
+			pw = login.getPw();
+			if(memdao.searchIdPw(id, pw)!=null) {
+				if(memdao.searchAdmin(id, pw)) {
+					cards.show(getContentPane(), "MENU_ADMIN");
+					menuad.userManagementB.addActionListener(new adminEvent());
+					menuad.noticeB.addActionListener(new adminEvent());
 				} else {
-					JOptionPane.showMessageDialog(frame, "Login fail!");
+					menuus=new MenuUser(id, pw);
+					getContentPane().add("MENU_USER", menuus);
+					cards.show(getContentPane(), "MENU_USER");
+					menuus.userInfoB.addActionListener(new userEvent());
+					menuus.healthInfoB.addActionListener(new userEvent());
+					menuus.exerciseB.addActionListener(new userEvent());
+					menuus.noticeB.addActionListener(new userEvent());
 				}
+			} else {
+				JOptionPane.showMessageDialog(getContentPane(), "입력하신 아이디나 비밀번호가 틀렸습니다.", "아아디/비밀번호 오류", JOptionPane.WARNING_MESSAGE);
 			}
-		});
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(204, 204, 255));
-		btnLogin.setBounds(292, 361, 105, 27);
-		frame.getContentPane().add(btnLogin);
-		
-		btnJoin = new JButton("JOIN");
-		btnJoin.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnJoin.setForeground(new Color(255, 255, 255));
-		btnJoin.setBackground(new Color(204, 204, 255));
-		btnJoin.setBounds(408, 361, 105, 27);
-		frame.getContentPane().add(btnJoin);
-		
-		btnFindIdOr = new JButton("FIND ID OR PASSWORD");
-		btnFindIdOr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		} else if(e.getSource()==login.joinB) {
+			Join join=new Join();
+		} else if(e.getSource()==login.findidpwB) {
+			// 아이디 비번 찾기 창 생성
+			final Frame findidpwF = new Frame("아이디 비밀번호 찾기");
+			findidpwF.add(new FindIdPw());
+			findidpwF.setVisible(true);
+			findidpwF.setSize(320, 310);
+			findidpwF.setLocation(400, 400);
+			findidpwF.setResizable(false);
+			// 아이디 비번 찾기 창만 닫기
+			findidpwF.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					findidpwF.setVisible(false);
+					findidpwF.dispose();
+				}
+			});
+		}
+	}
+
+	private class userEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+			cur_user = memdao.searchIdPw(id, pw);
+
+			if(e.getSource().equals(menuus.userInfoB)) {
+				userinfo=new UserInfo(cur_user);
+				getContentPane().add("USER_INFO", userinfo);
+				cards.show(getContentPane(), "USER_INFO");
+				userinfo.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(userinfo.menu, userinfo.sbar);
+					}
+				});
+				userinfo.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(userinfo.menu, userinfo.sbar);
+					}
+				});
+
+				userinfo.userInfoB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo=new UserInfo(cur_user);
+						getContentPane().add("USER_INFO", userinfo);
+						cards.show(getContentPane(), "USER_INFO");
+						userinfo.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo.menu, userinfo.sbar);
+							}
+						});
+						userinfo.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo.menu, userinfo.sbar);
+							}
+						});
+					}
+				});
+				userinfo.healthInfoB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						HealthInfo healthInfo = new HealthInfo();
+					}
+				});
+				userinfo.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						notice_us = new NoticeViewUser();
+						getContentPane().add("NOTICE_USER", notice_us);
+						cards.show(getContentPane(), "NOTICE_USER");
+						notice_us.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(notice_us.menu, notice_us.sbar);
+							}
+						});
+						notice_us.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(notice_us.menu, notice_us.sbar);
+							}
+						});
+					}
+				});
+				userinfo.exerciseB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exus=new ExerciseUser(id, pw);
+						getContentPane().add("EX_USER", exus);
+						cards.show(getContentPane(), "EX_USER");
+						exus.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(exus.menu, exus.sbar);
+							}
+						});
+						exus.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(exus.menu, exus.sbar);
+							}
+						});
+					}
+				});
+			} else if(e.getSource().equals(menuus.healthInfoB)) {
+				HealthInfo healthInfo = new HealthInfo();
+			} else if(e.getSource().equals(menuus.noticeB)) {
+				notice_us = new NoticeViewUser();
+				getContentPane().add("NOTICE_USER", notice_us);
+				cards.show(getContentPane(), "NOTICE_USER");
+				notice_us.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(notice_us.menu, notice_us.sbar);
+					}
+				});
+				notice_us.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(notice_us.menu, notice_us.sbar);
+					}
+				});
+
+				notice_us.userInfoB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo=new UserInfo(cur_user);
+						getContentPane().add("USER_INFO", userinfo);
+						cards.show(getContentPane(), "USER_INFO");
+						userinfo.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo.menu, userinfo.sbar);
+							}
+						});
+						userinfo.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo.menu, userinfo.sbar);
+							}
+						});
+						
+					}
+				});
+				notice_us.healthInfoB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						HealthInfo healthInfo = new HealthInfo();
+					}
+				});
+				notice_us.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						notice_us = new NoticeViewUser();
+						getContentPane().add("NOTICE_USER", notice_us);
+						cards.show(getContentPane(), "NOTICE_USER");
+						notice_us.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(notice_us.menu, notice_us.sbar);
+							}
+						});
+						notice_us.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(notice_us.menu, notice_us.sbar);
+							}
+						});
+					}
+				});
+				notice_us.exerciseB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exus=new ExerciseUser(id, pw);
+						getContentPane().add("EX_USER", exus);
+						cards.show(getContentPane(), "EX_USER");
+						exus.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(exus.menu, exus.sbar);
+							}
+						});
+						exus.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(exus.menu, exus.sbar);
+							}
+						});
+					}
+				});
+			} else if(e.getSource().equals(menuus.exerciseB)) {
+				exus=new ExerciseUser(id, pw);
+				getContentPane().add("EX_USER", exus);
+				cards.show(getContentPane(), "EX_USER");
+				exus.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(exus.menu, exus.sbar);
+					}
+				});
+				exus.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(exus.menu, exus.sbar);
+					}
+				});
+
+				exus.userInfoB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo=new UserInfo(cur_user);
+						getContentPane().add("USER_INFO", userinfo);
+						cards.show(getContentPane(), "USER_INFO");
+						userinfo.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo.menu, userinfo.sbar);
+							}
+						});
+						userinfo.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo.menu, userinfo.sbar);
+							}
+						});
+						
+					}
+				});
+				exus.healthInfoB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo=new UserInfo(cur_user);
+						getContentPane().add("USER_INFO", userinfo);
+						cards.show(getContentPane(), "USER_INFO");
+						userinfo.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo.menu, userinfo.sbar);
+							}
+						});
+						userinfo.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo.menu, userinfo.sbar);
+							}
+						});
+					}
+				});
+				exus.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						HealthInfo healthInfo = new HealthInfo();
+					}
+				});
+				exus.exerciseB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exus=new ExerciseUser(id, pw);
+						getContentPane().add("EX_USER", exus);
+						cards.show(getContentPane(), "EX_USER");
+						exus.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(exus.menu, exus.sbar);
+							}
+						});
+						exus.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(exus.menu, exus.sbar);
+							}
+						});
+					}
+				});
 			}
-		});
-		btnFindIdOr.setForeground(new Color(255, 255, 255));
-		btnFindIdOr.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnFindIdOr.setBackground(new Color(204, 204, 255));
-		btnFindIdOr.setBounds(292, 400, 221, 27);
-		frame.getContentPane().add(btnFindIdOr);
-		
-		lblLogo = new JLabel("LOGO");
-		lblLogo.setBackground(new Color(204, 204, 255));
-		lblLogo.setFont(new Font("Calibri", Font.PLAIN, 15));
-		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setBounds(292, 114, 221, 125);
-		frame.getContentPane().add(lblLogo);
+		}
+	}
+
+	private class adminEvent implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			id = login.getId();
+			pw = login.getPw();
+
+			if(e.getSource().equals(menuad.userManagementB)) {
+				userinfo_ad = new UserInfoAdmin();
+				getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
+				cards.show(getContentPane(), "USER_INFO_ADMIN");
+				userinfo_ad.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(userinfo_ad.menu, userinfo_ad.sbar);
+					}
+				});
+				userinfo_ad.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(notice_ad.menu, notice_ad.sbar);
+					}
+				});
+
+				userinfo_ad.userManagementB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo_ad = new UserInfoAdmin();
+						getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
+						cards.show(getContentPane(), "USER_INFO_ADMIN");
+						userinfo_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						userinfo_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						
+					}
+				});
+				userinfo_ad.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						notice_ad = new NoticeView();
+						getContentPane().add("NOTICE_ADMIN", notice_ad);
+						cards.show(getContentPane(), "NOTICE_ADMIN");
+						notice_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+						notice_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+					}
+				});
+			} else if(e.getSource().equals(menuad.noticeB)){
+				notice_ad = new NoticeView();
+				getContentPane().add("NOTICE_ADMIN", notice_ad);
+				cards.show(getContentPane(), "NOTICE_ADMIN");
+				notice_ad.menu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						active(notice_ad.menu, notice_ad.sbar);
+					}
+				});
+				notice_ad.background.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						nonactive(notice_ad.menu, notice_ad.sbar);
+					}
+				});
+
+				notice_ad.userManagementB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						userinfo_ad = new UserInfoAdmin();
+						getContentPane().add("USER_INFO_ADMIN", userinfo_ad);
+						cards.show(getContentPane(), "USER_INFO_ADMIN");
+						userinfo_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						userinfo_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(userinfo_ad.menu, userinfo_ad.sbar);
+							}
+						});
+						
+					}
+				});
+				notice_ad.noticeB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						notice_ad = new NoticeView();
+						getContentPane().add("NOTICE_ADMIN", notice_ad);
+						cards.show(getContentPane(), "NOTICE_ADMIN");
+						notice_ad.menu.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								active(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+						notice_ad.background.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								nonactive(notice_ad.menu, notice_ad.sbar);
+							}
+						});
+					}
+				});
+			}
+		}
+	}
+
+	// 아무것도 안 눌렀을 때 - 평상시
+	public void nonactive(JLabel menu, JLabel sbar) {
+		menu.setVisible(true);
+		menu.setEnabled(true);
+		sbar.setVisible(false);
+		sbar.setEnabled(false);				
+	}
+
+	// 메뉴 눌렀을 때 
+	public void active(JLabel menu, JLabel sbar) {
+		menu.setVisible(false);
+		menu.setEnabled(false);
+		sbar.setVisible(true);
+		sbar.setEnabled(true);				
 	}
 }
+
+
